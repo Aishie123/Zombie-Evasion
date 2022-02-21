@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.IntroScreen">
+
+    <ImageView
+        android:id="@+id/bgBedroom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bg_bedroom" />
+
+    <ImageView
+        android:id="@+id/darkShade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.6"
+        android:src="@drawable/darkshade"></ImageView>
+
+    <ImageView
+        android:id="@+id/questionBox"
+        android:layout_width="478dp"
+        android:layout_height="263dp"
+        android:alpha="0.95"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.216"
+        app:srcCompat="@drawable/bigtxtbox" />
+
+
+    <TextView
+        android:id="@+id/nameQuestion"
+        android:layout_width="354dp"
+        android:layout_height="47dp"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="What's your name?"
+        android:autoSizeTextType="uniform"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="@+id/questionBox"
+        app:layout_constraintEnd_toEndOf="@+id/questionBox"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="@+id/questionBox"
+        app:layout_constraintTop_toTopOf="@+id/questionBox"
+        app:layout_constraintVertical_bias="0.407" />
+
+    <EditText
+        android:id="@+id/userInput"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:ems="15"
+        android:fontFamily="@font/nicoclean_regular"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textColor="#004531"
+        app:layout_constraintEnd_toEndOf="@+id/nameQuestion"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/nameQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/nameQuestion"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <ImageButton
+        android:id="@+id/btnNext"
+        android:layout_width="122dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="40dp"
+        android:padding="0dp"
+        android:alpha="0.80"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/bgBedroom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionBox"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Submit"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNext"
+        app:layout_constraintEnd_toEndOf="@+id/btnNext"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/btnNext"
+        app:layout_constraintTop_toTopOf="@+id/btnNext" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
