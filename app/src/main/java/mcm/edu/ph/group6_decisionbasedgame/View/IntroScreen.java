@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class IntroScreen extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class IntroScreen extends AppCompatActivity {
     private ImageButton btnNext;
     private String userName;
     private String TAG = "IntroScreen";
+
+    GameData game = new GameData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

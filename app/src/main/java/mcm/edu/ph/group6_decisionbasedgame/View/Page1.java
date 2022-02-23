@@ -2,18 +2,41 @@ package mcm.edu.ph.group6_decisionbasedgame.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page1 extends AppCompatActivity {
 
-    private String TAG = "Page1";
+    ImageView darkShade;
+    TextView txtDialogue, txtChoice1, txtChoice2, txtChoice3,txtChoice4;
+    ImageButton btnChoice1, btnChoice2, btnChoice3, btnChoice4;
+    String userName;
+    String TAG = "Page1";
+
+    GameData game = new GameData();
+
+    ObjectAnimator txtFadeIn, txtFadeOut, txtTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -23,16 +46,86 @@ public class Page1 extends AppCompatActivity {
         setContentView(R.layout.activity_page1);
 
 
+        darkShade = findViewById(R.id.darkShade);
+
+        btnChoice1 = findViewById(R.id.btnChoice1);
+        btnChoice2 = findViewById(R.id.btnChoice2);
+        btnChoice3 = findViewById(R.id.btnChoice3);
+        btnChoice4 = findViewById(R.id.btnChoice4);
+
+        txtDialogue = findViewById(R.id.txtDialogue);
+        txtChoice1 = findViewById(R.id.txtChoice1);
+        txtChoice2 = findViewById(R.id.txtChoice2);
+        txtChoice3 = findViewById(R.id.txtChoice3);
+        txtChoice4 = findViewById(R.id.txtChoice4);
+
+        // receiving user input from intro screen
+        Intent i = getIntent();
+        userName = i.getExtras().getString("user");
+        Log.d(TAG, "The user's name is " + userName + ".");
+
+        game = new GameData(userName);
+
+        // choices to be shown later on
+        btnChoice1.setVisibility(View.GONE);
+        btnChoice2.setVisibility(View.GONE);
+        btnChoice3.setVisibility(View.GONE);
+        btnChoice4.setVisibility(View.GONE);
+        txtChoice1.setVisibility(View.GONE);
+        txtChoice2.setVisibility(View.GONE);
+        txtChoice3.setVisibility(View.GONE);
+        txtChoice4.setVisibility(View.GONE);
+
+        opening();
     }
 
-//bedroom scene 1
+// BEDROOM SCENE - STARTING PAGE
+
+    // starting dialogue
+    @SuppressLint("SetTextI18n")
+    public void opening(){
+
+        txtFadeIn = ObjectAnimator.ofFloat(txtDialogue,"alpha",0f, 1f);
+        txtFadeIn.setDuration(2000); // fades in for 2 seconds
+
+        txtFadeIn.start();
+
+        txtDialogue.setText("You wake up at your bed... ");
+
+        final Handler handler = new Handler(Looper.getMainLooper()); // for delay
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                txtFadeIn.start(); // fades in for 2 seconds
+                txtDialogue.setText("You hear from your room's radio that there was a global pandemic that made humans turn into ZOMBIES.");
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtFadeIn.setDuration(2000); // fades in for 2 seconds
+                        txtDialogue.setText("What will you do? \n"+
+                                "\n 1. Call somebody for help." +
+                                "\n 2. Go to the kitchen." +
+                                "\n 3. Go back to sleep." +
+                                "\n 4. Go downstairs and look for people around.");
+
+                        btnChoice1.setVisibility(View.VISIBLE);
+                        btnChoice2.setVisibility(View.VISIBLE);
+                        btnChoice3.setVisibility(View.VISIBLE);
+                        btnChoice4.setVisibility(View.VISIBLE);
+                        txtChoice1.setVisibility(View.VISIBLE);
+                        txtChoice2.setVisibility(View.VISIBLE);
+                        txtChoice3.setVisibility(View.VISIBLE);
+                        txtChoice4.setVisibility(View.VISIBLE);
+                    }
+                }, 7000); // 7 seconds delay
+            }
+        }, 4000); // 4 seconds delay
 
 
-
-
-
-
-
-
-
+    }
 }
+
+
+
+

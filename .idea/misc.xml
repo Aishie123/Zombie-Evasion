@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/darkshade.xml" value="0.2994791666666667" />
-        <entry key="app/src/main/res/layout/activity_intro_screen.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_intro_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24547101449275363" />
+        <entry key="app/src/main/res/layout/activity_page1.xml" value="0.335" />
       </map>
     </option>
   </component>
