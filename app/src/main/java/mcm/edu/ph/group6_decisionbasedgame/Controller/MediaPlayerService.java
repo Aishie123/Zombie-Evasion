@@ -7,8 +7,6 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 
 import mcm.edu.ph.group6_decisionbasedgame.R;
-import mcm.edu.ph.group6_decisionbasedgame.View.IntroScreen;
-import mcm.edu.ph.group6_decisionbasedgame.View.Page1;
 
 public class MediaPlayerService extends Service {
     private static final String TAG = null;

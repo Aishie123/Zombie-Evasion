@@ -65,7 +65,7 @@ public class IntroScreen extends AppCompatActivity {
         });
     }
 
-    //changing button shades when pressed -----------------------------------------------------------------------------------------
+    //changing button images when pressed -----------------------------------------------------------------------------------------
     @SuppressLint("ClickableViewAccessibility")
     public void press() {
 

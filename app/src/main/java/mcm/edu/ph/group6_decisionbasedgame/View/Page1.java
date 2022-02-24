@@ -29,7 +29,7 @@ public class Page1 extends AppCompatActivity {
 
     GameData game = new GameData();
 
-    ObjectAnimator txtFadeIn, txtFadeOut, txtTimer;
+    ObjectAnimator txtFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class Page1 extends AppCompatActivity {
         txtFadeIn = ObjectAnimator.ofFloat(txtDialogue,"alpha",0f, 1f);
         txtFadeIn.setDuration(2000); // fades in for 2 seconds
 
-        txtFadeIn.start();
+        txtFadeIn.start(); // dialogue fades in
 
         txtDialogue.setText("You wake up at your bed... ");
 
@@ -93,13 +93,13 @@ public class Page1 extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                txtFadeIn.start(); // dialogue fades in for 2 seconds
-                txtDialogue.setText("You hear from your room's radio that there was a global pandemic that made humans turn into ZOMBIES.");
+                txtFadeIn.start(); // dialogue fades in
+                txtDialogue.setText("You hear from your room's radio that the global pandemic made humans turn into ZOMBIES.");
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txtFadeIn.setDuration(2000); // dialogue fades in for 2 seconds
+                        txtFadeIn.start(); // dialogue fades in
                         txtDialogue.setText("What will you do? \n"+
                                 "\n 1. Call somebody for help." +
                                 "\n 2. Go to the kitchen." +
@@ -121,6 +121,41 @@ public class Page1 extends AppCompatActivity {
 
 
     }
+
+
+    // actions after player makes a decision -------------------------------------------------------
+    @SuppressLint("NonConstantResourceId")
+    public void onClick(View v){
+        switch (v.getId()){
+
+            // 1. Call somebody for help
+            case R.id.btnChoice1:
+                Intent page3 = new Intent(getApplicationContext(), Page3.class);
+                startActivity(page3); // moves to page 3 activity
+                break;
+
+            // 2. Go to the kitchen
+            case R.id.btnChoice2:
+                Intent page2 = new Intent(getApplicationContext(), Page2.class);
+                startActivity(page2); // moves to page 2 activity
+                break;
+
+            // 3. Go back to sleep
+            case R.id.btnChoice3:
+
+                break;
+
+            // 4. Go downstairs and look for people around.
+            case R.id.btnChoice4:
+                Intent page6 = new Intent(getApplicationContext(), Page6.class);
+                startActivity(page6); // moves to page 6 activity
+                break;
+
+        }
+        String "nikol"
+
+    }
+
 }
 
 

@@ -12,5 +12,9 @@ public class Page2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page2);
+
     }
+
+    // GO TO THE KITCHEN - JUSTINE
+
 }
