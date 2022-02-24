@@ -32,18 +32,20 @@ public class MediaPlayerService extends Service {
     }
 
     public void onStart(Intent intent, int startId) {
-        // TO DO
     }
     public IBinder onUnBind(Intent arg0) {
         // TO DO Auto-generated method
         return null;
     }
 
+    public void onContinue(){
+        player.start();
+    }
     public void onStop() {
 
     }
     public void onPause() {
-
+        player.pause();
     }
     @Override
     public void onDestroy() {

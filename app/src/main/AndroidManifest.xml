@@ -26,20 +26,22 @@
             android:exported="false" />
         <activity
             android:name=".View.Page2"
-            android:exported="false" />
-
+            android:launchMode="singleInstance"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <service
             android:name=".Controller.MediaPlayerService"
             android:enabled="true" />
-
         <activity
             android:name=".View.Page1"
             android:exported="false"
+            android:theme="@style/SplashTheme"
             android:launchMode="singleInstance"
             android:screenOrientation="landscape" />
         <activity
             android:name=".View.IntroScreen"
             android:exported="true"
+            android:theme="@style/SplashTheme"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

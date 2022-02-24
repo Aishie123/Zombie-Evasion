@@ -19,7 +19,6 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class IntroScreen extends AppCompatActivity {
 
-    private MediaPlayerService player;
     private EditText userInput;
     private ImageButton btnNext;
     private String userName;
@@ -55,10 +54,10 @@ public class IntroScreen extends AppCompatActivity {
 
                     userName = userInput.getText().toString();
                     Log.d(TAG, "The user's name is " + userName + ".");
-
                     Intent i = new Intent(getApplicationContext(), Page1.class);
                     i.putExtra("user", userName);
                     startActivity(i);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
             }
