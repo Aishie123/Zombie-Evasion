@@ -12,7 +12,7 @@ public class Page2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page2);
-
+// 1 2 3 4 5 6 7 8 9 10 testing if dis works huhu
     }
 
     // GO TO THE KITCHEN - JUSTINE
