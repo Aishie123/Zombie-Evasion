@@ -152,7 +152,6 @@ public class Page1 extends AppCompatActivity {
                 break;
 
         }
-        String "nikol"
 
     }
 
