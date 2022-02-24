@@ -2,9 +2,6 @@ package mcm.edu.ph.group6_decisionbasedgame.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -96,13 +93,13 @@ public class Page1 extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                txtFadeIn.start(); // fades in for 2 seconds
+                txtFadeIn.start(); // dialogue fades in for 2 seconds
                 txtDialogue.setText("You hear from your room's radio that there was a global pandemic that made humans turn into ZOMBIES.");
 
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txtFadeIn.setDuration(2000); // fades in for 2 seconds
+                        txtFadeIn.setDuration(2000); // dialogue fades in for 2 seconds
                         txtDialogue.setText("What will you do? \n"+
                                 "\n 1. Call somebody for help." +
                                 "\n 2. Go to the kitchen." +

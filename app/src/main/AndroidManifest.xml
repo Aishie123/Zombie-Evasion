@@ -10,16 +10,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group6_DecisionBasedGame">
         <activity
+            android:name=".View.Page7"
+            android:exported="false" />
+        <activity
+            android:name=".View.Page6"
+            android:exported="false" />
+        <activity
+            android:name=".View.Page5"
+            android:exported="false" />
+        <activity
+            android:name=".View.Page4"
+            android:exported="false" />
+        <activity
+            android:name=".View.Page3"
+            android:exported="false" />
+        <activity
+            android:name=".View.Page2"
+            android:exported="false" />
+
+        <service
+            android:name=".Controller.MediaPlayerService"
+            android:enabled="true" />
+
+        <activity
             android:name=".View.Page1"
             android:exported="false"
-            android:launchMode = "singleInstance"
-            android:screenOrientation="landscape"/>
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.IntroScreen"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

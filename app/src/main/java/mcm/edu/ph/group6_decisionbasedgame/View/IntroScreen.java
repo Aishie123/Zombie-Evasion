@@ -13,17 +13,17 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class IntroScreen extends AppCompatActivity {
 
+    private MediaPlayerService player;
     private EditText userInput;
     private ImageButton btnNext;
     private String userName;
     private String TAG = "IntroScreen";
-
-    GameData game = new GameData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,14 @@ public class IntroScreen extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide(); //hide the action bar
 
+        Intent svc=new Intent(this, MediaPlayerService.class);
+        startService(svc);
+
         setContentView(R.layout.activity_intro_screen);
 
         userInput = findViewById(R.id.userInput);
         btnNext = findViewById(R.id.btnNext);
+
 
         press();
         userInput();
