@@ -6,29 +6,20 @@ import android.os.Bundle;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
-import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
-import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page7 extends AppCompatActivity {
 
-    ImageView darkShade;
+    ImageView darkShade7;
     TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3, txt7Choice4;
     ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4;
 
@@ -44,7 +35,7 @@ public class Page7 extends AppCompatActivity {
 
         setContentView(R.layout.activity_page7);
 
-        darkShade = findViewById(R.id.darkShade7);
+        darkShade7 = findViewById(R.id.darkShade7);
 
         btn7Choice1 = findViewById(R.id.btn7Choice1);
         btn7Choice2 = findViewById(R.id.btn7Choice2);

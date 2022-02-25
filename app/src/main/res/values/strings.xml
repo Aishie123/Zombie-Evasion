@@ -1,12 +1,34 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Group6_DecisionBasedGame</string>
     <string name="title_activity_page2">Page2</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Strings used for Page 1-->
+    <string name="p1_dialogue1">You wake up at your bed…</string>
+    <string name="p1_dialogue2">You hear from your room\'s radio that the global pandemic made humans turn into ZOMBIES.</string>
+    <string name="p1_decision" >What will you do?
+        \n
+        \n 1. Call somebody for help.
+        \n 2. Go to the kitchen.
+        \n 3. Go back to sleep.
+        \n 4. Go downstairs and look for people around.</string>
+
+    <string name="p1_death" >It\'s the start of the game and you\'re already dead…
+        You are not good at this. </string>
+
+
+
+    <!-- Strings used for Page 7-->
+    <string name="p7_dialogue1">They kindly help you and let you in their van.</string>
+    <string name="p7_dialogue2">*CRASH*</string>
+    <string name="p7_dialogue3">But they made an accident and you are now stranded. </string>
+    <string name="p7_decision" >What will you do?
+        \n
+        \n 1. Stay in the car.
+        \n 2. Use your food and look for shelter.
+        \n 3. Fight the zombies.
+        \n 4. Just. Run. </string>
+
+    <string name="p7_death" > You died. </string>
+
 </resources>

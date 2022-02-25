@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -27,8 +28,8 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
     ImageView darkShade1;
-    TextView txt1Dialogue, txt1Choice1, txt1Choice2, txt1Choice3,txt1Choice4, txt1Reset;
-    ImageButton btn1Choice1, btn1Choice2, btn1Choice3, btn1Choice4, btn1Reset;
+    TextView txt1Dialogue, txt1Choice1, txt1Choice2, txt1Choice3,txt1Choice4, txt1Restart;
+    ImageButton btn1Choice1, btn1Choice2, btn1Choice3, btn1Choice4, btn1Restart;
     VideoView death1;
     MediaController mediaController;
     Handler handler;
@@ -40,7 +41,9 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
     GameData game = new GameData();
 
-    ObjectAnimator txtFadeIn, vidFadeIn,shapeFadeIn;
+    AlphaAnimation fadeIn;
+
+    ObjectAnimator darkFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +65,13 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
         btn1Choice2 = findViewById(R.id.btn1Choice2);
         btn1Choice3 = findViewById(R.id.btn1Choice3);
         btn1Choice4 = findViewById(R.id.btn1Choice4);
-        btn1Reset = findViewById(R.id.btn1Reset);
+        btn1Restart = findViewById(R.id.btn1Restart);
         txt1Dialogue = findViewById(R.id.txt1Dialogue);
         txt1Choice1 = findViewById(R.id.txt1Choice1);
         txt1Choice2 = findViewById(R.id.txt1Choice2);
         txt1Choice3 = findViewById(R.id.txt1Choice3);
         txt1Choice4 = findViewById(R.id.txt1Choice4);
-        txt1Reset = findViewById(R.id.txt1Reset);
+        txt1Restart = findViewById(R.id.txt1Restart);
         death1 = findViewById(R.id.death1);
 
 
@@ -87,18 +90,29 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
         btn1Choice2.setOnClickListener(this);
         btn1Choice3.setOnClickListener(this);
         btn1Choice4.setOnClickListener(this);
-        btn1Reset.setOnClickListener(this);
+        btn1Restart.setOnClickListener(this);
 
         death1.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
         mediaController = new MediaController(this); //link mediaController to videoView
         mediaController.setAnchorView(death1); //allow mediaController to control our videoView
         death1.setMediaController(mediaController);
 
+
         handler = new Handler(Looper.getMainLooper()); // for delay
+
+        fadeIn = new AlphaAnimation(0f , 1f); // this creates a fade in transition
+                                            // by turning the opacity (alpha) of the
+                                            // text from 0% (0f) to 100% (1f)
+        fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
+
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade1,"alpha",0.7f, 1f);
+        // transition to make the dark screen at the front of BG even darker after death
+        darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 
         hideButtons(); // hide choices
         opening(); // start opening dialogue
-        press(); // calls method that detects if buttons are pressed, and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
+        press(); // calls method that detects if buttons are pressed,
+                // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
     }
 
 // BEDROOM SCENE - STARTING PAGE
@@ -107,31 +121,22 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
     @SuppressLint("SetTextI18n")
     public void opening(){
 
-        txtFadeIn = ObjectAnimator.ofFloat(txt1Dialogue,"alpha",0f, 1f);
-        // this creates a fade in text transition by turning the opacity (alpha) of the text from 0% (0f) to 100% (1f)
-        txtFadeIn.setDuration(2000); // fades in for 2 seconds
-
-        txtFadeIn.start(); // dialogue fades in
-
-        txt1Dialogue.setText("You wake up at your bed... ");
+        txt1Dialogue.startAnimation(fadeIn); // dialogue fades in
+        txt1Dialogue.setText(R.string.p1_dialogue1);
 
         // the code inside handler will run after the 4-sec delay
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                txtFadeIn.start(); // dialogue fades in
-                txt1Dialogue.setText("You hear from your room's radio that the global pandemic made humans turn into ZOMBIES.");
+                txt1Dialogue.startAnimation(fadeIn); // dialogue fades in
+                txt1Dialogue.setText(R.string.p1_dialogue2);
 
                 // the code inside handler will run after the 7-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        txtFadeIn.start(); // dialogue fades in
-                        txt1Dialogue.setText("What will you do? \n"+
-                                "\n 1. Call somebody for help." +
-                                "\n 2. Go to the kitchen." +
-                                "\n 3. Go back to sleep." +
-                                "\n 4. Go downstairs and look for people around.");
+                        txt1Dialogue.startAnimation(fadeIn); // dialogue fades in
+                        txt1Dialogue.setText(R.string.p1_decision);
 
                         showButtons(); //show choices
                     }
@@ -164,14 +169,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
             case R.id.btn1Choice3:
 
                 hideButtons(); // hide choices
-
-                shapeFadeIn = ObjectAnimator.ofFloat(darkShade1,"alpha",0.7f, 1f);
-                // this shape was originally used for making the background darker,
-                // but I also used this to cover the screen when the choice leads to death
-                // so I put an animator that turns the shape opacity (alpha) slowly from 70% (0.7f) to 100% (1f).
-
-                shapeFadeIn.setDuration(1000); // fades in for 1 second
-                shapeFadeIn.start(); // covers the screen with a black shape
+                darkFadeIn.start(); // covers the screen with a black shape
                 txt1Dialogue.setText(""); // makes dialogue empty
 
                 handler.postDelayed(new Runnable() {
@@ -179,11 +177,8 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                     public void run() {
                         stopService(svc);
 
-                        vidFadeIn = ObjectAnimator.ofFloat(death1,"alpha",0f, 1f);
-                        vidFadeIn.setDuration(2000); // fades in for 2 seconds
-
                         death1.setVisibility(View.VISIBLE);
-                        vidFadeIn.start(); // video fades in
+                        death1.startAnimation(fadeIn); // video fades in
                         death1.start(); // play video
 
                         death1.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
@@ -191,14 +186,11 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp)
                             {
-                                txt1Dialogue.setText("It's the start of the game and you're already dead..." +
-                                        "\n You are not good at this.");
+                                txt1Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt1Dialogue.setText(R.string.p1_death);
+
                                 death1.setVisibility(View.GONE); // removes video
-                                txtFadeIn.start(); // dialogue fades in
-
-                                btn1Reset.setVisibility(View.VISIBLE); // show reset button
-                                txt1Reset.setVisibility(View.VISIBLE);
-
+                                showRestartButton();
                             }
                         });
                     }
@@ -213,7 +205,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             // If reset button is pressed
-            case R.id.btn1Reset:
+            case R.id.btn1Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();
                 startActivity(intro); // moves back to intro screen
@@ -224,7 +216,14 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-    // call this method every time you need to hide choice buttons  ------------------------------------
+    // call this method to show restart button  ------------------------------------------------------------------------
+    public void showRestartButton(){
+        btn1Restart.setVisibility(View.VISIBLE);
+        txt1Restart.setVisibility(View.VISIBLE);
+    }
+
+
+    // call this method to hide choice buttons  ------------------------------------------------------------------------
     public void hideButtons() {
         btn1Choice1.setVisibility(View.GONE);
         btn1Choice2.setVisibility(View.GONE);
@@ -237,7 +236,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-    // call this method every time you need to show choice buttons  -----------------------------------
+    // call this method to show choice buttons  -----------------------------------------------------------------------
     public void showButtons() {
         btn1Choice1.setVisibility(View.VISIBLE);
         btn1Choice2.setVisibility(View.VISIBLE);
@@ -310,15 +309,15 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        btn1Reset.setOnTouchListener(new View.OnTouchListener() {
+        btn1Restart.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 // when pressed
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btn1Reset.setImageResource(R.drawable.btn_pressed);
+                    btn1Restart.setImageResource(R.drawable.btn_pressed);
                 }
                 // when not pressed
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btn1Reset.setImageResource(R.drawable.btn_unpressed);
+                    btn1Restart.setImageResource(R.drawable.btn_unpressed);
                 }
                 return false;
             }
