@@ -13,4 +13,8 @@ public class Page7 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page7);
     }
+
+    // ALFONSO AGUIRRE'S TASK
+    // THEY KINDLY HELP YOU AND LET YOU IN THEIR VAN
+
 }

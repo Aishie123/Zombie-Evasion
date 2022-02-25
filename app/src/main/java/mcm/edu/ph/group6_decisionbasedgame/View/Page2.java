@@ -15,6 +15,7 @@ public class Page2 extends AppCompatActivity {
 
     }
 
-    // GO TO THE KITCHEN - JUSTINE
+    // JUSTINE JAVINES' TASK
+    // GO TO THE KITCHEN
 
 }

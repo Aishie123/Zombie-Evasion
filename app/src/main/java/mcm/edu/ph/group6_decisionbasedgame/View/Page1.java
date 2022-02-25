@@ -93,14 +93,14 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 
-        hideButtons();
-        opening();
-        press();
+        hideButtons(); // hide choices
+        opening(); // start opening dialogue
+        press(); // calls method that detects if buttons are pressed, and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
     }
 
 // BEDROOM SCENE - STARTING PAGE
 
-    // starting dialogue
+    // opening dialogue
     @SuppressLint("SetTextI18n")
     public void opening(){
 

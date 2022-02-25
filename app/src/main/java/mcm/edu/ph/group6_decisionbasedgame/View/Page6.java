@@ -13,4 +13,8 @@ public class Page6 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page6);
     }
+
+    // BRENT RIVERO'S TASK
+    // YOU SEE SOMEONE IN A VAN THAT IS NOT A ZOMBIE
+
 }

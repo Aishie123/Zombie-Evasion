@@ -13,4 +13,9 @@ public class Page3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
     }
+
+    // ALVIN VICENTE'S TASK
+    // CALL SOMEBODY FOR HELP
+
+
 }

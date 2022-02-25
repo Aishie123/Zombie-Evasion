@@ -13,4 +13,8 @@ public class Page5 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page5);
     }
+
+    // ALVIN VICENTE'S TASK
+    // YOU HEAR ZOMBIES BANGING ON YOUR DOOR
+
 }

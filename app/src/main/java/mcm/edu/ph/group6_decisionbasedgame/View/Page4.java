@@ -13,4 +13,8 @@ public class Page4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page4);
     }
+
+    // JUSTINE JAVINES' TASK
+    // GETS SOME KNIFE AND FOOD
+
 }
