@@ -6,4 +6,186 @@
     android:layout_height="match_parent"
     tools:context=".View.Page5">
 
+    <ImageView
+        android:id="@+id/bg5Bedroom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bg_bedroom" />
+
+    <ImageView
+        android:id="@+id/darkShade5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:src="@drawable/darkshade"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/txt5Dialogue"
+        android:layout_width="398dp"
+        android:layout_height="170dp"
+        android:fontFamily="@font/nicoclean_regular"
+        android:gravity="center"
+        android:text="Dialogue"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn5Choice1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bg5Bedroom"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+
+    <ImageButton
+        android:id="@+id/btn5Choice1"
+        android:layout_width="116dp"
+        android:layout_height="60dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/bg5Bedroom"
+        app:layout_constraintEnd_toStartOf="@+id/btn5Choice2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bg5Bedroom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt5Dialogue"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btn4Choice4"
+        android:layout_width="116dp"
+        android:layout_height="60dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn5Choice3"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice3"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btn5Choice2"
+        android:layout_width="116dp"
+        android:layout_height="60dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/btn5Choice3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn5Choice1"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice1"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btn5Choice3"
+        android:layout_width="116dp"
+        android:layout_height="60dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/btn4Choice4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn5Choice2"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice2"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txt5Choice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Choice 1"
+        android:textColor="#5e6978"
+        app:layout_constraintBottom_toBottomOf="@+id/btn5Choice1"
+        app:layout_constraintEnd_toEndOf="@+id/btn5Choice1"
+        app:layout_constraintStart_toStartOf="@+id/btn5Choice1"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice1"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txt5Choice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Choice 2"
+        android:textColor="#5e6978"
+        app:layout_constraintBottom_toBottomOf="@+id/btn5Choice2"
+        app:layout_constraintEnd_toEndOf="@+id/btn5Choice2"
+        app:layout_constraintStart_toStartOf="@+id/btn5Choice2"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice2"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txt5Choice3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Choice 3"
+        android:textColor="#5e6978"
+        app:layout_constraintBottom_toBottomOf="@+id/btn5Choice3"
+        app:layout_constraintEnd_toEndOf="@+id/btn5Choice3"
+        app:layout_constraintStart_toStartOf="@+id/btn5Choice3"
+        app:layout_constraintTop_toTopOf="@+id/btn5Choice3"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/txt5Choice4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Choice 4"
+        android:textColor="#5e6978"
+        app:layout_constraintBottom_toBottomOf="@+id/btn4Choice4"
+        app:layout_constraintEnd_toEndOf="@+id/btn4Choice4"
+        app:layout_constraintStart_toStartOf="@+id/btn4Choice4"
+        app:layout_constraintTop_toTopOf="@+id/btn4Choice4"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/btn5Reset"
+        android:layout_width="116dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/bg5Bedroom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txt5Reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Restart"
+        android:visibility="gone"
+        android:textColor="#5e6978"
+        app:layout_constraintBottom_toBottomOf="@+id/btn5Reset"
+        app:layout_constraintEnd_toEndOf="@+id/btn5Reset"
+        app:layout_constraintStart_toStartOf="@+id/btn5Reset"
+        app:layout_constraintTop_toTopOf="@+id/btn5Reset"
+        tools:ignore="HardcodedText" />
+
+    <VideoView
+        android:id="@+id/death5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
