@@ -150,7 +150,7 @@
         tools:ignore="HardcodedText" />
 
     <ImageButton
-        android:id="@+id/btn6Reset"
+        android:id="@+id/btn6Restart"
         android:layout_width="116dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
@@ -164,17 +164,17 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/txt6Reset"
+        android:id="@+id/txt6Restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nicobold_regular"
         android:text="Restart"
         android:visibility="gone"
         android:textColor="#5e6978"
-        app:layout_constraintBottom_toBottomOf="@+id/btn6Reset"
-        app:layout_constraintEnd_toEndOf="@+id/btn6Reset"
-        app:layout_constraintStart_toStartOf="@+id/btn6Reset"
-        app:layout_constraintTop_toTopOf="@+id/btn6Reset"
+        app:layout_constraintBottom_toBottomOf="@+id/btn6Restart"
+        app:layout_constraintEnd_toEndOf="@+id/btn6Restart"
+        app:layout_constraintStart_toStartOf="@+id/btn6Restart"
+        app:layout_constraintTop_toTopOf="@+id/btn6Restart"
         tools:ignore="HardcodedText" />
 
     <VideoView

@@ -165,9 +165,10 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
+
+
             // 3. Go back to sleep
             case R.id.btn1Choice3:
-
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
                 txt1Dialogue.setText(""); // makes dialogue empty
@@ -294,13 +295,12 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 return false;
             }
         });
-
         btn1Choice4.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 // when pressed
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btn1Choice4.setImageResource(R.drawable.btn_pressed);
-                }
+                        btn1Choice4.setImageResource(R.drawable.btn_pressed);
+                    }
                 // when not pressed
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
                     btn1Choice4.setImageResource(R.drawable.btn_unpressed);
