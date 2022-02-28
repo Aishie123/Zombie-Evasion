@@ -16,6 +16,8 @@
     <string name="p1_death" >It\'s the start of the game and you\'re already dead…
         \n You are not good at this.</string>
 
+
+
     <!-- Strings used for Page 2 -->
     <string name="p2_dialogue1">You decided to go to the kitchen.</string>
     <string name="p2_dialogue2">You hear zombies nearby.</string>
@@ -28,6 +30,9 @@
 
     <string name="p2_death1" >Getting yourself trapped in a house with zombies… \n always works… </string>
     <string name="p2_death2" >Going out in the open without any weapons or whatsoever… \n always works…</string>
+    <string name="p2_death3" >Getting yourself trapped in a house with zombies… \n always works… </string>
+
+
 
     <!-- Strings used for Page 3 -->
     <string name="p3_dialogue1">You decided to call somebody for help. </string>
@@ -55,6 +60,9 @@
     <string name="p3_sister2">We\'re safe over here, okay?</string>
     <string name="p3_sister3">You hear some banging on THEIR end of the phone</string>
 
+    <string name="p3_brother1">You decided to call your brother… </string>
+    <string name="p3_brother2">We\'re safe over here, okay?</string>
+    <string name="p3_brother3">You hear some banging on THEIR end of the phone</string>
 
     <string name="p3_parents1">You decided to call your parents… </string>
     <string name="p3_parents2">, are you alright? </string>
@@ -63,14 +71,36 @@
     <string name="p3_parents5">Don\'t worry about us, sweetie. Stay safe and take care of yourself! </string>
     <string name="p3_parents6">*CALL ENDED* </string>
 
-    <!-- Strings used for Page 5 -->
-    <string name="p5_dialogue1">You decided to call somebody for help. </string>
-    <string name="p5_decision" >Who do you call?
+
+
+    <!-- Strings used for Page 4 -->
+    <string name="p4_dialogue1">You found a knife and some food. </string>
+    <string name="p4_decision" >Where do you go next?
         \n
-        \n 1. The police
-        \n 2. Your friend
-        \n 3. Your sibling
-        \n 4. Your parents </string>
+        \n 1. Go to the basement.
+        \n 2. Go to the backyard.
+        \n 3. Go to your room.
+        \n 4. Go outside your house. </string>
+
+    <string name="p4_death1" >Getting yourself trapped in a house with zombies… \n always works… </string>
+    <string name="p4_death2" >Going out in the open without any weapons or whatsoever… \n always works…</string>
+
+
+
+    <!-- Strings used for Page 5 -->
+    <string name="p5_dialogue1">You hear zombies banging on your room\'s door. </string>
+    <string name="p5_decision" >What will you do?
+        \n
+        \n 1. Fight.
+        \n 2. Jump from your room\'s window.
+        \n 3. Pray.
+        \n 4. R U N. </string>
+
+    <string name="p5_death2">You died. </string>
+    <string name="p5_death3">Really? Did you really think that would work? </string>
+    <string name="p5_death4">Where would you even run to? </string>
+
+
 
     <!-- Strings used for Page 6 -->
     <string name="p6_dialogue1">You see someone in a van who\'s not a zombie </string>
@@ -85,6 +115,8 @@
     <string name="p6_death3" >Yeah, fight the zombie horde *ALONE*, THAT\'s a good idea, </string>
     <string name="p6_death4" >You do know that so many people AND zombies are at the supermarket, </string>
 
+
+
     <!-- Strings used for Page 7 -->
     <string name="p7_dialogue1">They kindly help you and let you in their van.</string>
     <string name="p7_dialogue2">*CRASH*</string>
@@ -95,7 +127,6 @@
         \n 2. Use your food and look for shelter.
         \n 3. Fight the zombies.
         \n 4. Just. Run. </string>
-
 
     <string name="p7_death3" > You vs thousands of zombies.
         \n Seems possible.  </string>

@@ -33,7 +33,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
     VideoView death7;
     MediaController mediaController;
     Handler handler;
-    Intent svc, page2, intro;
+    Intent svc, page4, intro;
 
     String userName;
     String TAG = "Page7";

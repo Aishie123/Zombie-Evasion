@@ -165,8 +165,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
-
-
             // 3. Go back to sleep
             case R.id.btn1Choice3:
                 hideButtons(); // hide choices
