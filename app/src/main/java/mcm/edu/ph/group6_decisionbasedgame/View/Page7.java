@@ -25,6 +25,7 @@ import android.widget.VideoView;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+
 public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
     ImageView darkShade7;
@@ -76,10 +77,9 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         // receiving user input from intro screen
         Intent i = getIntent();
         userName = i.getExtras().getString("user");
+        inventory = i.getExtras().getBoolean("supplies");
         Log.d(TAG, "The user's name is " + userName + ".");
 
-        Intent n = getIntent();
-        inventory = n.getExtras().getBoolean("inventory");
 
         svc = new Intent(this, MediaPlayerService.class);
 
@@ -146,8 +146,17 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
 
     // actions after player makes a decision and clicks a button -------------------------------------------------------
+    @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
     @SuppressLint("NonConstantResourceId")
     public void onClick(View v){
+
+        if (inventory == true) {
+            btn7Choice2.setEnabled(true);
+        }
+        else if (inventory == false) {
+            btn7Choice2.setEnabled(false);
+        }
+
         switch (v.getId()){
 
             // 1. Stay in the car.
@@ -185,14 +194,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
             // 2. Grab your stuff and find a shelter.
             case R.id.btn7Choice2:
 
-                if (inventory = true)
-                {
-                    btn7Choice1.setEnabled(true);
-                }
-                else if (inventory = false)
-                {
-                    btn7Choice1.setEnabled(false);
-                }
+
 
 
                 break;

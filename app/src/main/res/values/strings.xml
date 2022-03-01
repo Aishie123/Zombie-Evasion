@@ -45,7 +45,7 @@
 
     <string name="p3_policeR1">You decided to call the police for help…</string>
     <string name="p3_policeR2">They eventually answered and instructed you to stay in your house.</string>
-    <string name="p3_policeR3">STAY IN MY HOUSE?
+    <string name="p3_policeR3">: STAY IN MY HOUSE?
         /n There are literally zombies BARGING into my house and you\'re telling me to STAY INSIDE, TRAPPED?!</string>
     <string name="p3_policeR4">The officer told you to calm down…</string>
     <string name="p3_policeR5">You stopped the call and-</string>
@@ -57,18 +57,25 @@
     <string name="p3_friend3">and suddenly the call disconnected…</string>
 
     <string name="p3_sister1">You decided to call your sister… </string>
-    <string name="p3_sister2">We\'re safe over here, okay?</string>
-    <string name="p3_sister3">You hear some banging on THEIR end of the phone</string>
+    <string name="p3_sister2">You hear her crying through the phone. </string>
+    <string name="p3_sister3">Sister: W-what should I do? </string>
+    <string name="p3_sister4">: Go find some supplies and find a safe place to stay, okay? </string>
+    <string name="p3_sister5">: Don\'t worry. I\'ll come to you. </string>
+    <string name="p3_sister6">*CALL ENDED* </string>
 
     <string name="p3_brother1">You decided to call your brother… </string>
-    <string name="p3_brother2">We\'re safe over here, okay?</string>
-    <string name="p3_brother3">You hear some banging on THEIR end of the phone</string>
+    <string name="p3_brother2">You hear him hyperventilate and can feel his panic through the phone. </string>
+    <string name="p3_brother3">So you try to calm him down. </string>
+    <string name="p3_brother4">: Go find some supplies and find a safe place to stay, okay? </string>
+    <string name="p3_brother5">: Don\'t worry. I\'ll come to you. </string>
+    <string name="p3_brother6">*CALL ENDED* </string>
 
     <string name="p3_parents1">You decided to call your parents… </string>
-    <string name="p3_parents2">, are you alright? </string>
-    <string name="p3_parents3">We\'re safe over here, okay?</string>
+    <string name="p3_parents2_1">Mother: </string>
+    <string name="p3_parents2_2">, are you alright? </string>
+    <string name="p3_parents3">Father: We\'re safe over here, okay?</string>
     <string name="p3_parents4">You hear some banging on THEIR end of the phone.</string>
-    <string name="p3_parents5">Don\'t worry about us, sweetie. Stay safe and take care of yourself! </string>
+    <string name="p3_parents5">Mother: Don\'t worry about us, sweetie. Stay safe and take care of yourself! </string>
     <string name="p3_parents6">*CALL ENDED* </string>
 
 
@@ -88,7 +95,7 @@
 
 
     <!-- Strings used for Page 5 -->
-    <string name="p5_dialogue1">You hear zombies banging on your room\'s door. </string>
+    <string name="p5_dialogue1">You suddenly hear zombies banging on your room\'s door. </string>
     <string name="p5_decision" >What will you do?
         \n
         \n 1. Fight.

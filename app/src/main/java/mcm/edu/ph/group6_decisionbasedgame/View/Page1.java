@@ -35,10 +35,9 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
     Handler handler;
     Intent svc, page2, page3, page6, intro;
 
+    Boolean inventory = false;
     String userName;
     String TAG = "Page1";
-
-    GameData game = new GameData();
 
     AlphaAnimation fadeIn;
 
@@ -58,7 +57,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
 
         //initializing components
         darkShade1 = findViewById(R.id.darkShade1);
-
 
         btn1Choice1 = findViewById(R.id.btn1Choice1);
         btn1Choice2 = findViewById(R.id.btn1Choice2);
@@ -155,6 +153,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 page3 = new Intent(getApplicationContext(), Page3.class);
                 finish();
                 page3.putExtra("user", userName);
+                page3.putExtra("supplies", inventory);
                 startActivity(page3); // moves to page 3 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
@@ -164,6 +163,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 page2 = new Intent(getApplicationContext(), Page2.class);
                 finish();
                 page2.putExtra("user", userName);
+                page2.putExtra("supplies", inventory);
                 startActivity(page2); // moves to page 2 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
@@ -204,11 +204,12 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                 page6 = new Intent(getApplicationContext(), Page6.class);
                 finish();
                 page6.putExtra("user", userName);
+                page6.putExtra("supplies", inventory);
                 startActivity(page6); // moves to page 6 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
-            // If reset button is pressed
+            // If restart button is pressed
             case R.id.btn1Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();

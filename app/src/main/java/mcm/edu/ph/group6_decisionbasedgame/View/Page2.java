@@ -35,6 +35,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
     Handler handler;
     Intent svc, page4, intro;
 
+    Boolean inventory;
     String userName;
     String TAG = "Page4";
 
@@ -74,6 +75,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
         // receiving user input from intro screen
         Intent i = getIntent();
         userName = i.getExtras().getString("user");
+        inventory = i.getExtras().getBoolean("supplies");
         Log.d(TAG, "The user's name is " + userName + ".");
 
         svc = new Intent(this, MediaPlayerService.class);
@@ -237,20 +239,21 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
                 }, 1500); // 1 and a half seconds delay
                 break;
 
-            // 4. Outside.
+            // 4. Search for supplies.
             case R.id.btn2Choice4:
+                inventory = true;
                 page4 = new Intent(getApplicationContext(), Page4.class);
                 page4.putExtra("user", userName);
+                page4.putExtra("supplies", inventory);
                 startActivity(page4); // moves to page 6 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
 
-            // If reset button is pressed
+            // If restart button is pressed
             case R.id.btn2Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();
-                intro.putExtra("user", userName);
                 startActivity(intro); // moves back to intro screen
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;

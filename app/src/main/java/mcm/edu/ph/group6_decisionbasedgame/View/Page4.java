@@ -36,11 +36,10 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
     Handler handler;
     Intent svc, page5, page6, intro;
 
+    Boolean inventory;
     String userName;
     String TAG = "Page4";
 
-
-    GameData game = new GameData();
 
     AlphaAnimation fadeIn;
 
@@ -75,6 +74,8 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
         // receiving user input from intro screen
         Intent i = getIntent();
         userName = i.getExtras().getString("user");
+        inventory = i.getExtras().getBoolean("supplies");
+
         Log.d(TAG, "The user's name is " + userName + ".");
 
         svc = new Intent(this, MediaPlayerService.class);
@@ -204,6 +205,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             case R.id.btn4Choice3:
                 page5 = new Intent(getApplicationContext(), Page5.class);
                 page5.putExtra("user", userName);
+                page5.putExtra("supplies", inventory);
                 startActivity(page5); // moves to page 5 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
@@ -212,12 +214,13 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             case R.id.btn4Choice4:
                 page6 = new Intent(getApplicationContext(), Page6.class);
                 page6.putExtra("user", userName);
+                page6.putExtra("supplies", inventory);
                 startActivity(page6); // moves to page 6 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
 
-            // If reset button is pressed
+            // If restart button is pressed
             case R.id.btn4Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();
