@@ -143,8 +143,8 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
 
             // 1. Ask for help.
             case R.id.btn6Choice1:
-                page7 = new Intent(getApplicationContext(), Page3.class);
-                startActivity(page7); // moves to page 3 activity
+                page7 = new Intent(getApplicationContext(), Page7.class);
+                startActivity(page7); // moves to page 7 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 

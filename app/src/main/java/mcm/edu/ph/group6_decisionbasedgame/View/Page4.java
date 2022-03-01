@@ -34,7 +34,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
     VideoView death4;
     MediaController mediaController;
     Handler handler;
-    Intent svc, page2, page3,page4,page5, page6, intro;
+    Intent svc, page5, page6, intro;
 
     String userName;
     String TAG = "Page4";
@@ -107,21 +107,19 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 
         hideButtons(); // hide choices
-        opening(); // start opening dialogue
+        dialogue(); // start opening dialogue
         press(); // calls method that detects if buttons are pressed,
         // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
 
     }
 
- // GETS SOME KNIFE AND FOOD
- // opening dialogue
  @SuppressLint("SetTextI18n")
- public void opening(){
+ public void dialogue(){
 
      txt4Dialogue.startAnimation(fadeIn); // dialogue fades in
      txt4Dialogue.setText(R.string.p4_dialogue1);
 
-     // the code inside handler will run after the 4-sec delay
+     // the code inside handler will run after the 2-sec delay
      handler.postDelayed(new Runnable() {
          @Override
          public void run() {
@@ -139,7 +137,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         switch (v.getId()){
 
-            // 1. go to the attic
+            // 1. Go to the basement.
             case R.id.btn4Choice1:
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
@@ -171,7 +169,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
 
                 break;
 
-            // 2. Backyard.
+            // 2. Go to the backyard.
             case R.id.btn4Choice2:
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
@@ -202,16 +200,18 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                 }, 1500); // 1 and a half seconds delay
                 break;
 
-            // 3. go to your room
+            // 3. Go to your room.
             case R.id.btn4Choice3:
                 page5 = new Intent(getApplicationContext(), Page5.class);
+                page5.putExtra("user", userName);
                 startActivity(page5); // moves to page 5 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
-            // 4. Outside.
+            // 4. Go outside your house.
             case R.id.btn4Choice4:
                 page6 = new Intent(getApplicationContext(), Page6.class);
+                page6.putExtra("user", userName);
                 startActivity(page6); // moves to page 6 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;

@@ -28,13 +28,14 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
     ImageView darkShade7;
-    TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Reset;
-    ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7_1Reset;
+    TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
+    ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
     VideoView death7;
     MediaController mediaController;
     Handler handler;
     Intent svc, page4, intro;
 
+    Boolean inventory;
     String userName;
     String TAG = "Page7";
 
@@ -62,13 +63,13 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         btn7Choice2 = findViewById(R.id.btn7Choice2);
         btn7Choice3 = findViewById(R.id.btn7Choice3);
         btn7Choice4 = findViewById(R.id.btn7Choice4);
-        btn7_1Reset = findViewById(R.id.btn7_1Reset);
+        btn7Restart = findViewById(R.id.btn7Restart);
         txt7Dialogue = findViewById(R.id.txt7Dialogue);
         txt7Choice1 = findViewById(R.id.txt7Choice1);
         txt7Choice2 = findViewById(R.id.txt7Choice2);
         txt7Choice3 = findViewById(R.id.txt7Choice3);
         txt7Choice4 = findViewById(R.id.txt7Choice4);
-        txt7Reset = findViewById(R.id.txt7Reset);
+        txt7Restart = findViewById(R.id.txt7Restart);
         death7 = findViewById(R.id.death7);
 
 
@@ -76,6 +77,9 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         Intent i = getIntent();
         userName = i.getExtras().getString("user");
         Log.d(TAG, "The user's name is " + userName + ".");
+
+        Intent n = getIntent();
+        inventory = n.getExtras().getBoolean("inventory");
 
         svc = new Intent(this, MediaPlayerService.class);
 
@@ -85,7 +89,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         btn7Choice2.setOnClickListener(this);
         btn7Choice3.setOnClickListener(this);
         btn7Choice4.setOnClickListener(this);
-        btn7_1Reset.setOnClickListener(this);
+        btn7Restart.setOnClickListener(this);
 
         death7.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
         mediaController = new MediaController(this); //link mediaController to videoView
@@ -181,6 +185,16 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
             // 2. Grab your stuff and find a shelter.
             case R.id.btn7Choice2:
 
+                if (inventory = true)
+                {
+                    btn7Choice1.setEnabled(true);
+                }
+                else if (inventory = false)
+                {
+                    btn7Choice1.setEnabled(false);
+                }
+
+
                 break;
 
             // 3. Fight the zombies
@@ -247,7 +261,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             // If reset button is pressed
-            case R.id.btn7_1Reset:
+            case R.id.btn7Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();
                 startActivity(intro); // moves back to intro screen
@@ -260,8 +274,8 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
     // call this method to show restart button  ------------------------------------------------------------------------
     public void showRestartButton(){
-        btn7_1Reset.setVisibility(View.VISIBLE);
-        txt7Reset.setVisibility(View.VISIBLE);
+        btn7Restart.setVisibility(View.VISIBLE);
+        txt7Restart.setVisibility(View.VISIBLE);
     }
 
 
@@ -351,15 +365,15 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        btn7_1Reset.setOnTouchListener(new View.OnTouchListener() {
+        btn7Restart.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 // when pressed
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    btn7_1Reset.setImageResource(R.drawable.btn_pressed);
+                    btn7Restart.setImageResource(R.drawable.btn_pressed);
                 }
                 // when not pressed
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    btn7_1Reset.setImageResource(R.drawable.btn_unpressed);
+                    btn7Restart.setImageResource(R.drawable.btn_unpressed);
                 }
                 return false;
             }

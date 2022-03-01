@@ -159,7 +159,7 @@
       app:layout_constraintTop_toTopOf="parent" />
 
   <ImageButton
-      android:id="@+id/btn7_1Reset"
+      android:id="@+id/btn7Restart"
       android:layout_width="116dp"
       android:layout_height="60dp"
       android:layout_marginBottom="60dp"
@@ -173,17 +173,17 @@
       tools:ignore="SpeakableTextPresentCheck" />
 
   <TextView
-      android:id="@+id/txt7Reset"
+      android:id="@+id/txt7Restart"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:fontFamily="@font/nicobold_regular"
       android:text="Restart"
       android:visibility="gone"
       android:textColor="#5e6978"
-      app:layout_constraintBottom_toBottomOf="@+id/btn7_1Reset"
-      app:layout_constraintEnd_toEndOf="@+id/btn7_1Reset"
-      app:layout_constraintStart_toStartOf="@+id/btn7_1Reset"
-      app:layout_constraintTop_toTopOf="@+id/btn7_1Reset"
+      app:layout_constraintBottom_toBottomOf="@+id/btn7Restart"
+      app:layout_constraintEnd_toEndOf="@+id/btn7Restart"
+      app:layout_constraintStart_toStartOf="@+id/btn7Restart"
+      app:layout_constraintTop_toTopOf="@+id/btn7Restart"
       tools:ignore="HardcodedText" />
 
 

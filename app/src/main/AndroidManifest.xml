@@ -11,23 +11,39 @@
         android:theme="@style/Theme.Group6_DecisionBasedGame">
         <activity
             android:name=".View.Page7"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.Page6"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.Page5"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.Page4"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.Page3"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".View.Page2"
-            android:launchMode="singleInstance"
             android:exported="false"
+            android:theme="@style/SplashTheme"
+            android:launchMode="singleInstance"
             android:screenOrientation="landscape" />
         <service
             android:name=".Controller.MediaPlayerService"

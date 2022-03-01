@@ -38,7 +38,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
     String userName;
     String TAG = "Page1";
 
-
     GameData game = new GameData();
 
     AlphaAnimation fadeIn;
@@ -75,13 +74,13 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
         death1 = findViewById(R.id.death1);
 
 
-        // receiving user input from intro screen
+        //receiving user input from intro screen
         Intent i = getIntent();
         userName = i.getExtras().getString("user");
         Log.d(TAG, "The user's name is " + userName + ".");
 
         svc = new Intent(this, MediaPlayerService.class);
-        game = new GameData(userName); // informing the database about user's name
+        // game = new GameData(userName); // informing the database about user's name
 
 
         // setting listeners for the choice buttons
@@ -154,6 +153,8 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
             // 1. Call somebody for help
             case R.id.btn1Choice1:
                 page3 = new Intent(getApplicationContext(), Page3.class);
+                finish();
+                page3.putExtra("user", userName);
                 startActivity(page3); // moves to page 3 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
@@ -161,6 +162,8 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
             // 2. Go to the kitchen
             case R.id.btn1Choice2:
                 page2 = new Intent(getApplicationContext(), Page2.class);
+                finish();
+                page2.putExtra("user", userName);
                 startActivity(page2); // moves to page 2 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
@@ -199,6 +202,8 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
             // 4. Go downstairs and look for people around.
             case R.id.btn1Choice4:
                 page6 = new Intent(getApplicationContext(), Page6.class);
+                finish();
+                page6.putExtra("user", userName);
                 startActivity(page6); // moves to page 6 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;

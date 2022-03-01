@@ -24,6 +24,8 @@ public class IntroScreen extends AppCompatActivity {
     private String userName;
     private String TAG = "IntroScreen";
 
+    GameData game = new GameData();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +53,8 @@ public class IntroScreen extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (v.getId() == R.id.btnNext) {
-
                     userName = userInput.getText().toString();
+                    game = new GameData(userName);
                     Log.d(TAG, "The user's name is " + userName + ".");
                     Intent i = new Intent(getApplicationContext(), Page1.class);
                     i.putExtra("user", userName);

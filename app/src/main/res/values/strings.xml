@@ -20,7 +20,7 @@
 
     <!-- Strings used for Page 2 -->
     <string name="p2_dialogue1">You decided to go to the kitchen.</string>
-    <string name="p2_dialogue2">You hear zombies nearby.</string>
+    <string name="p2_dialogue2">But you hear zombies nearby.</string>
     <string name="p2_decision" >What will you do?
         \n
         \n 1. Go to the backyard.
