@@ -71,7 +71,7 @@
     <string name="p3_brother6">*CALL ENDED* </string>
 
     <string name="p3_parents1">You decided to call your parents… </string>
-    <string name="p3_parents2_1">Mother: </string>
+    <string name="p3_parents2_1">"Mother: "</string>
     <string name="p3_parents2_2">, are you alright? </string>
     <string name="p3_parents3">Father: We\'re safe over here, okay?</string>
     <string name="p3_parents4">You hear some banging on THEIR end of the phone.</string>

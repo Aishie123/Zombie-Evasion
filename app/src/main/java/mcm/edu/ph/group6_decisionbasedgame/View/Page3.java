@@ -2,13 +2,51 @@ package mcm.edu.ph.group6_decisionbasedgame.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.VideoView;
 
+import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
+import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
+import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
-public class Page3 extends AppCompatActivity {
+public class Page3 extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView darkShade3;
+    TextView txt3Dialogue, txt3Choice1, txt3Choice2, txt3Choice3,txt3Choice4, txt3Restart;
+    ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
+    VideoView death3;
+    MediaController mediaController;
+    Handler handler;
+    Intent svc, page5;
+
+    boolean inventory, response;
+    String userName, sibling;
+    String TAG = "Page3";
+
+
+    GameController randomizer = new GameController();
+    GameData game = new GameData();
+
+    AlphaAnimation fadeIn;
+
+    ObjectAnimator darkFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +57,478 @@ public class Page3 extends AppCompatActivity {
         getSupportActionBar().hide(); //hide the action bar
 
         setContentView(R.layout.activity_page3);
+
+        //initializing components
+        darkShade3 = findViewById(R.id.darkShade3);
+        btn3Choice1 = findViewById(R.id.btn3Choice1);
+        btn3Choice2 = findViewById(R.id.btn3Choice2);
+        btn3Choice3 = findViewById(R.id.btn3Choice3);
+        btn3Choice4 = findViewById(R.id.btn3Choice4);
+        btn3Restart = findViewById(R.id.btn3Restart);
+        txt3Dialogue = findViewById(R.id.txt3Dialogue);
+        txt3Choice1 = findViewById(R.id.txt3Choice1);
+        txt3Choice2 = findViewById(R.id.txt3Choice2);
+        txt3Choice3 = findViewById(R.id.txt3Choice3);
+        txt3Choice4 = findViewById(R.id.txt3Choice4);
+        txt3Restart = findViewById(R.id.txt3Restart);
+        death3 = findViewById(R.id.death3);
+
+
+
+        // receiving user input from intro screen
+        Intent i = getIntent();
+        userName = i.getExtras().getString("user");
+        inventory = i.getExtras().getBoolean("supplies");
+        Log.d(TAG, "The user's name is " + userName + ".");
+
+        svc = new Intent(this, MediaPlayerService.class);
+
+        // setting listeners for the choice buttons
+        // this will detect whether a button is clicked or not
+        btn3Choice1.setOnClickListener(this);
+        btn3Choice2.setOnClickListener(this);
+        btn3Choice3.setOnClickListener(this);
+        btn3Choice4.setOnClickListener(this);
+        btn3Restart.setOnClickListener(this);
+
+        death3.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
+        mediaController = new MediaController(this); //link mediaController to videoView
+        mediaController.setAnchorView(death3); //allow mediaController to control our videoView
+        death3.setMediaController(mediaController);
+
+
+        handler = new Handler(Looper.getMainLooper()); // for delay
+
+        fadeIn = new AlphaAnimation(0f , 1f); // this creates a fade in transition
+        // by turning the opacity (alpha) of the
+        // text from 0% (0f) to 100% (1f)
+        fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
+
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade3,"alpha",0.7f, 1f);
+        // transition to make the dark screen at the front of BG even darker after death
+        darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
+
+        hideButtons(); // hide choices
+        dialogue(); // start opening dialogue
+        press(); // calls method that detects if buttons are pressed,
+        // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
+
     }
 
-    // ALVIN VICENTE'S TASK
-    // CALL SOMEBODY FOR HELP
+    public void dialogue(){
+        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+        txt3Dialogue.setText(R.string.p3_dialogue1);
 
+                // the code inside handler will run after the 2-sec delay
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                        txt3Dialogue.setText(R.string.p3_decision);
+
+                        showButtons(); //show choices
+                    }
+                }, 2000); // 2 seconds delay
+    }
+
+
+    // actions after player makes a decision and clicks a button -------------------------------------------------------
+    @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
+    @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+
+            // 1. Police? ------------------------------------------------------------------------------
+            case R.id.btn3Choice1:
+
+                response = randomizer.policeResponse();
+
+                // if police responds
+                if (response == true) {
+                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt3Dialogue.setText(R.string.p3_policeR1);
+
+                    // the code inside handler will run after the 3-sec delay
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                            txt3Dialogue.setText(R.string.p3_policeR2);
+
+                            // the code inside handler will run after the 7-sec delay
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt3Dialogue.setText(userName + R.string.p3_policeR3);
+
+                                    // the code inside handler will run after the 2-sec delay
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                            txt3Dialogue.setText(R.string.p3_policeR4);
+
+                                            // the code inside handler will run after the 2-sec delay
+                                            handler.postDelayed(new Runnable() {
+                                                public void run() {
+                                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                    txt3Dialogue.setText(R.string.p3_policeR5);
+
+                                                    // the code inside handler will run after the 2-sec delay
+                                                    handler.postDelayed(new Runnable() {
+                                                        public void run() {
+                                                            moveToP5();
+                                                        }
+                                                    }, 2000); // 2 seconds delay
+                                                }
+                                            }, 2000); // 2 seconds delay
+
+                                        }
+                                    }, 7000); // 7 seconds delay
+
+                                }
+                            }, 3000); // 3 seconds delay
+
+                        }
+                    }, 2000); // 2 seconds delay
+
+                }
+
+                // if police doesn't respond
+                else if (response == false) {
+                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt3Dialogue.setText(R.string.p3_policeI);
+                }
+
+            break;
+
+
+
+            // 2. Friend? ------------------------------------------------------------------------------
+            case R.id.btn3Choice2:
+                txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                txt3Dialogue.setText(R.string.p3_friend1);
+
+                // the code inside handler will run after the 3-sec delay
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                        txt3Dialogue.setText(R.string.p3_friend2);
+
+                        // the code inside handler will run after the 7-sec delay
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt3Dialogue.setText(R.string.p3_friend3);
+
+                                // the code inside handler will run after the 2-sec delay
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        moveToP5();
+                                    }
+                                }, 2000); // 2 seconds delay
+                            }
+                        }, 7000); // 7 seconds delay
+
+                    }
+                }, 3000); // 3 seconds delay
+
+            break;
+
+
+
+            // 3. Sibling? ------------------------------------------------------------------------------
+            case R.id.btn2Choice3:
+
+                sibling = randomizer.randomizeSibling();
+
+                if (sibling.equals("sister")){
+                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt3Dialogue.setText(R.string.p3_sister1);
+
+                    // the code inside handler will run after the 2-sec delay
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                            txt3Dialogue.setText(R.string.p3_sister2);
+
+                            // the code inside handler will run after the 2-sec delay
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt3Dialogue.setText(R.string.p3_sister3);
+
+                                    // the code inside handler will run after the 2-sec delay
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                            txt3Dialogue.setText(userName + R.string.p3_sister4);
+
+                                            // the code inside handler will run after the 3-sec delay
+                                            handler.postDelayed(new Runnable() {
+                                                public void run() {
+                                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                    txt3Dialogue.setText(userName + R.string.p3_sister5);
+
+                                                    // the code inside handler will run after the 2-sec delay
+                                                    handler.postDelayed(new Runnable() {
+                                                        public void run() {
+                                                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                            txt3Dialogue.setText(userName + R.string.p3_sister6);
+
+                                                            // the code inside handler will run after the 2-sec delay
+                                                            handler.postDelayed(new Runnable() {
+                                                                public void run() {
+                                                                    moveToP5();
+                                                                }
+                                                            }, 2000); // 2 seconds delay
+
+                                                        }
+                                                    }, 2000); // 2 seconds delay
+
+                                                }
+                                            }, 3000); // 3 seconds delay
+
+                                        }
+                                    }, 2000); // 2 seconds delay
+
+                                }
+                            }, 2000); // 2 seconds delay
+
+                        }
+                    }, 2000); // 2 seconds delay
+
+                }
+
+                if (sibling.equals("brother")){
+                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt3Dialogue.setText(R.string.p3_brother1);
+
+                    // the code inside handler will run after the 2-sec delay
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                            txt3Dialogue.setText(R.string.p3_brother2);
+
+                            // the code inside handler will run after the 3-sec delay
+                            handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt3Dialogue.setText(R.string.p3_brother3);
+
+                                    // the code inside handler will run after the 2-sec delay
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                            txt3Dialogue.setText(userName + R.string.p3_brother4);
+
+                                            // the code inside handler will run after the 3-sec delay
+                                            handler.postDelayed(new Runnable() {
+                                                public void run() {
+                                                    txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                    txt3Dialogue.setText(userName + R.string.p3_brother5);
+
+                                                    // the code inside handler will run after the 2-sec delay
+                                                    handler.postDelayed(new Runnable() {
+                                                        public void run() {
+                                                            txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                            txt3Dialogue.setText(userName + R.string.p3_brother6);
+
+                                                            // the code inside handler will run after the 2-sec delay
+                                                            handler.postDelayed(new Runnable() {
+                                                                public void run() {
+                                                                    moveToP5();
+                                                                }
+                                                            }, 2000); // 2 seconds delay
+
+                                                        }
+                                                    }, 2000); // 2 seconds delay
+
+                                                }
+                                            }, 3000); // 3 seconds delay
+
+                                        }
+                                    }, 2000); // 2 seconds delay
+
+                                }
+                            }, 3000); // 2 seconds delay
+
+                        }
+                    }, 2000); // 2 seconds delay
+
+                }
+
+            break;
+
+            // 4. Parents? ------------------------------------------------------------------------------
+            case R.id.btn3Choice4:
+                txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                txt3Dialogue.setText(R.string.p3_parents1);
+
+                // the code inside handler will run after the 2-sec delay
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                        txt3Dialogue.setText(R.string.p3_parents2_1 + userName + R.string.p3_parents2_2);
+
+                        // the code inside handler will run after the 2-sec delay
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt3Dialogue.setText(R.string.p3_parents3);
+
+                                // the code inside handler will run after the 2-sec delay
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                        txt3Dialogue.setText(R.string.p3_parents4);
+
+                                        // the code inside handler will run after the 2-sec delay
+                                        handler.postDelayed(new Runnable() {
+                                            public void run() {
+                                                txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                txt3Dialogue.setText(R.string.p3_parents5);
+
+                                                // the code inside handler will run after the 4-sec delay
+                                                handler.postDelayed(new Runnable() {
+                                                    public void run() {
+                                                        txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                        txt3Dialogue.setText(R.string.p3_parents6);
+
+                                                        // the code inside handler will run after the 2-sec delay
+                                                        handler.postDelayed(new Runnable() {
+                                                            public void run() {
+                                                                moveToP5();
+                                                            }
+                                                        }, 2000); // 2 seconds delay
+                                                    }
+                                                }, 4000); // 4 seconds delay
+                                            }
+                                        }, 2000); // 2 seconds delay
+                                    }
+                                }, 2000); // 2 seconds delay
+
+                            }
+                        }, 2000); // 2 seconds delay
+                    }
+                }, 2000); // 2 seconds delay
+
+            break;
+
+        }
+    }
+
+
+
+
+    // call this method to proceed to page 5 ------------------------------------------------------------------------
+    public void moveToP5(){
+        page5 = new Intent(getApplicationContext(), Page5.class);
+        page5.putExtra("user", userName);
+        page5.putExtra("supplies", inventory);
+        startActivity(page5); // moves to page 5 activity
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
+    }
+
+    // call this method to hide choice buttons  ------------------------------------------------------------------------
+    public void hideButtons() {
+        btn3Choice1.setVisibility(View.GONE);
+        btn3Choice2.setVisibility(View.GONE);
+        btn3Choice3.setVisibility(View.GONE);
+        btn3Choice4.setVisibility(View.GONE);
+        txt3Choice1.setVisibility(View.GONE);
+        txt3Choice2.setVisibility(View.GONE);
+        txt3Choice3.setVisibility(View.GONE);
+        txt3Choice4.setVisibility(View.GONE);
+
+    }
+
+    // call this method to show choice buttons  -----------------------------------------------------------------------
+    public void showButtons() {
+        btn3Choice1.setVisibility(View.VISIBLE);
+        btn3Choice2.setVisibility(View.VISIBLE);
+        btn3Choice3.setVisibility(View.VISIBLE);
+        btn3Choice4.setVisibility(View.VISIBLE);
+        txt3Choice1.setVisibility(View.VISIBLE);
+        txt3Choice2.setVisibility(View.VISIBLE);
+        txt3Choice3.setVisibility(View.VISIBLE);
+        txt3Choice4.setVisibility(View.VISIBLE);
+    }
+
+
+    //changing button images when pressed -----------------------------------------------------------------------------------------
+    @SuppressLint("ClickableViewAccessibility")
+    public void press() {
+
+        btn3Choice1.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn3Choice1.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn3Choice1.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn3Choice2.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn3Choice2.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn3Choice2.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn3Choice3.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn3Choice3.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn3Choice3.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+        btn3Choice4.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn3Choice4.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn3Choice4.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn3Restart.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn3Restart.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn3Restart.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+    }
 
 }
+

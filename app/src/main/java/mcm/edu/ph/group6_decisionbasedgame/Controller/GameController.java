@@ -22,10 +22,10 @@ public class GameController {
     public boolean randomizeSurvival(){
         int luck = random.nextInt(2);
         if (luck == 1){
-            alive = true;
+            alive = true; // live
         }
         else {
-            alive = false;
+            alive = false; // die
         }
         return alive;
     }
@@ -33,10 +33,10 @@ public class GameController {
     public boolean policeResponse(){
         int chance = random.nextInt(2);
         if (chance == 1){
-            response = true;
+            response = true; // respond
         }
         else {
-            response = false;
+            response = false; // ignore
         }
         return response;
     }
