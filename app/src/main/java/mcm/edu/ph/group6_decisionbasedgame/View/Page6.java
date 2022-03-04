@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,25 +24,22 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
-import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
+import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
-public class Page6 extends AppCompatActivity implements View.OnClickListener {
+public class Page6 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
     ImageView darkShade6;
     TextView txt6Dialogue, txt6Choice1, txt6Choice2, txt6Choice3, txt6Choice4, txt6Restart;
     ImageButton btn6Choice1, btn6Choice2, btn6Choice3, btn6Choice4, btn6Restart;
     VideoView death6;
     MediaController mediaController;
+    MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent svc, page7, intro;
+    Intent page7, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page6";
-
-
-    GameData game = new GameData();
 
     AlphaAnimation fadeIn;
 
@@ -81,9 +81,6 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
         inventory = i.getExtras().getBoolean("supplies");
         Log.d(TAG, "The user's name is " + userName + ".");
 
-        svc = new Intent(this, MediaPlayerService.class);
-        game = new GameData(userName); // informing the database about user's name
-
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
         btn6Choice1.setOnClickListener(this);
@@ -91,6 +88,10 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
         btn6Choice3.setOnClickListener(this);
         btn6Choice4.setOnClickListener(this);
         btn6Restart.setOnClickListener(this);
+
+        //Binding to music service to allow music to unpause. Refer to onServiceConnected method
+        Intent musicIntent = new Intent(this, MusicPlayerService.class);
+        bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death6.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
         mediaController = new MediaController(this); //link mediaController to videoView
@@ -105,7 +106,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
         // text from 0% (0f) to 100% (1f)
         fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
 
-        darkFadeIn = ObjectAnimator.ofFloat(darkShade6, "alpha", 0.7f, 1f);
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade6, "alpha", 0.5f, 1f);
         // transition to make the dark screen at the front of BG even darker after death
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 
@@ -146,6 +147,8 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
             // 1. Ask for help.
             case R.id.btn6Choice1:
                 page7 = new Intent(getApplicationContext(), Page7.class);
+                finish();
+                page7.putExtra("user", userName);
                 page7.putExtra("supplies", inventory);
                 startActivity(page7); // moves to page 7 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
@@ -160,7 +163,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopService(svc);
+                        musicPlayerService.pauseMusic();
 
                         death6.setVisibility(View.VISIBLE);
                         death6.startAnimation(fadeIn); // video fades in
@@ -169,6 +172,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                         death6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp) {
+                                musicPlayerService.unpauseMusic();
                                 txt6Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt6Dialogue.setText(R.string.p6_death2);
 
@@ -189,7 +193,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopService(svc);
+                        musicPlayerService.pauseMusic();
 
                         death6.setVisibility(View.VISIBLE);
                         death6.startAnimation(fadeIn); // video fades in
@@ -198,6 +202,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                         death6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp) {
+                                musicPlayerService.unpauseMusic();
                                 txt6Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt6Dialogue.setText(R.string.p6_death3);
 
@@ -219,7 +224,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopService(svc);
+                        musicPlayerService.pauseMusic();
 
                         death6.setVisibility(View.VISIBLE);
                         death6.startAnimation(fadeIn); // video fades in
@@ -228,6 +233,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
                         death6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp) {
+                                musicPlayerService.unpauseMusic();
                                 txt6Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt6Dialogue.setText(R.string.p6_death4);
 
@@ -363,4 +369,36 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
         });
 
     }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(musicPlayerService!=null){
+            musicPlayerService.pauseMusic();
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(musicPlayerService!=null){
+            musicPlayerService.unpauseMusic();
+        }
+    }
+
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        MusicPlayerService.MyBinder binder = (MusicPlayerService.MyBinder) iBinder;
+        if(binder != null) {
+            musicPlayerService = binder.getService();
+            musicPlayerService.unpauseMusic();
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
+
+    }
+
 }

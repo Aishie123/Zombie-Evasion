@@ -7,7 +7,7 @@
     tools:context=".View.Page3">
 
     <ImageView
-        android:id="@+id/bg3Bedroom"
+        android:id="@+id/bgPage3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn3Choice1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bg3Bedroom"
+        app:layout_constraintTop_toTopOf="@+id/bgPage3"
         app:layout_constraintVertical_chainStyle="spread" />
 
 
@@ -49,10 +49,10 @@
         android:layout_height="60dp"
         android:padding="0dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/bg3Bedroom"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPage3"
         app:layout_constraintEnd_toStartOf="@+id/btn3Choice2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bg3Bedroom"
+        app:layout_constraintStart_toEndOf="@+id/bgPage3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt3Dialogue"
         app:srcCompat="@drawable/btn_unpressed"
@@ -157,7 +157,7 @@
         android:padding="0dp"
         android:scaleType="fitXY"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/bg3Bedroom"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPage3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/btn_unpressed"

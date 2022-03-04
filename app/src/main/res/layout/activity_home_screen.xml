@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".View.HomeScreen">
+
+    <ImageView
+        android:id="@+id/bg_homeScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.35"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/bg_bedroom"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/appLogo"
+        android:layout_width="412dp"
+        android:layout_height="92dp"
+        android:alpha="0.9"
+        android:fontFamily="@font/creepster_regular"
+        android:gravity="center"
+        android:text="Zombie Evasion"
+        android:textColor="#FFFFFF"
+        android:textSize="65sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bg_homeScreen" />
+
+    <TextView
+        android:id="@+id/appSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Escape the undead!"
+        android:textColor="#5e6978"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/appLogo"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/appLogo"
+        app:layout_constraintTop_toBottomOf="@+id/appLogo"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/btnStart"
+        android:layout_width="126dp"
+        android:layout_height="47dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSettings"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appLogo"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/txtStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Start Game"
+        android:textColor="#5e6978"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStart"
+        app:layout_constraintEnd_toEndOf="@+id/btnStart"
+        app:layout_constraintStart_toStartOf="@+id/btnStart"
+        app:layout_constraintTop_toTopOf="@+id/btnStart"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="126dp"
+        android:layout_height="47dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/btnCredits"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnStart"
+        app:layout_constraintTop_toTopOf="@+id/btnStart"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/txtSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Settings"
+        android:textColor="#5e6978"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSettings"
+        app:layout_constraintEnd_toEndOf="@+id/btnSettings"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/btnSettings"
+        app:layout_constraintTop_toTopOf="@+id/btnSettings"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/btnCredits"
+        android:layout_width="126dp"
+        android:layout_height="47dp"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSettings"
+        app:layout_constraintTop_toTopOf="@+id/btnSettings"
+        app:srcCompat="@drawable/btn_unpressed"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/txtCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Credits"
+        android:textColor="#5e6978"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCredits"
+        app:layout_constraintEnd_toEndOf="@+id/btnCredits"
+        app:layout_constraintStart_toStartOf="@+id/btnCredits"
+        app:layout_constraintTop_toTopOf="@+id/btnCredits"
+        tools:ignore="HardcodedText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

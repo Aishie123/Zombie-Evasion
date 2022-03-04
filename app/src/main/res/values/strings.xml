@@ -45,8 +45,8 @@
 
     <string name="p3_policeR1">You decided to call the police for help…</string>
     <string name="p3_policeR2">They eventually answered and instructed you to stay in your house.</string>
-    <string name="p3_policeR3">: STAY IN MY HOUSE?
-        /n There are literally zombies BARGING into my house and you\'re telling me to STAY INSIDE, TRAPPED?!</string>
+    <string name="p3_policeR3">%1$s : STAY IN MY HOUSE?
+        \n There are literally zombies BARGING into my house and you\'re telling me to STAY INSIDE, TRAPPED?!</string>
     <string name="p3_policeR4">The officer told you to calm down…</string>
     <string name="p3_policeR5">You stopped the call and-</string>
     <string name="p3_policeI">You try to call the police but they didn\'t respond…</string>
@@ -58,25 +58,24 @@
 
     <string name="p3_sister1">You decided to call your sister… </string>
     <string name="p3_sister2">You hear her crying through the phone. </string>
-    <string name="p3_sister3">Sister: W-what should I do? </string>
-    <string name="p3_sister4">: Go find some supplies and find a safe place to stay, okay? </string>
-    <string name="p3_sister5">: Don\'t worry. I\'ll come to you. </string>
-    <string name="p3_sister6">*CALL ENDED* </string>
+    <string name="p3_sister3">Sister : W-what should I do? </string>
+    <string name="p3_sister4">%1$s : Go find some supplies and find a safe place to stay, okay? </string>
+    <string name="p3_sister5">%1$s : Don\'t worry. I\'ll come to you. </string>
+    <string name="p3_sister6">-CALL ENDED- </string>
 
     <string name="p3_brother1">You decided to call your brother… </string>
     <string name="p3_brother2">You hear him hyperventilate and can feel his panic through the phone. </string>
     <string name="p3_brother3">So you try to calm him down. </string>
-    <string name="p3_brother4">: Go find some supplies and find a safe place to stay, okay? </string>
-    <string name="p3_brother5">: Don\'t worry. I\'ll come to you. </string>
-    <string name="p3_brother6">*CALL ENDED* </string>
+    <string name="p3_brother4">%1$s : Go find some supplies and find a safe place to stay, okay? </string>
+    <string name="p3_brother5">%1$s : Don\'t worry. I\'ll come to you. </string>
+    <string name="p3_brother6">-CALL ENDED- </string>
 
     <string name="p3_parents1">You decided to call your parents… </string>
-    <string name="p3_parents2_1">"Mother: "</string>
-    <string name="p3_parents2_2">, are you alright? </string>
-    <string name="p3_parents3">Father: We\'re safe over here, okay?</string>
+    <string name="p3_parents2">Mother : %1$s, are you alright? </string>
+    <string name="p3_parents3">Father : We\'re safe over here, okay?</string>
     <string name="p3_parents4">You hear some banging on THEIR end of the phone.</string>
-    <string name="p3_parents5">Mother: Don\'t worry about us, sweetie. Stay safe and take care of yourself! </string>
-    <string name="p3_parents6">*CALL ENDED* </string>
+    <string name="p3_parents5">Mother : Don\'t worry about us, sweetie. Stay safe and take care of yourself! </string>
+    <string name="p3_parents6">-CALL ENDED- </string>
 
 
 
@@ -103,14 +102,17 @@
         \n 3. Pray.
         \n 4. R U N. </string>
 
-    <string name="p5_death2">You died. </string>
+    <string name="p5_alive1">You fought the zombies and went outside your house. </string>
+    <string name="p5_alive2">You survived the fall. </string>
+    <string name="p5_death1">Fighting zombies without any weapon… What a great idea! </string>
+    <string name="p5_death2">You did not manage the fall. </string>
     <string name="p5_death3">Really? Did you really think that would work? </string>
     <string name="p5_death4">Where would you even run to? </string>
 
 
 
     <!-- Strings used for Page 6 -->
-    <string name="p6_dialogue1">You see someone in a van who\'s not a zombie </string>
+    <string name="p6_dialogue1">On the road, you see someone in a van who\'s not a zombie. </string>
     <string name="p6_decision" >What will you do?
         \n
         \n 1. Ask for help.
@@ -118,27 +120,36 @@
         \n 3. Ignore them.
         \n 4. Go to the supermarket. </string>
 
-    <string name="p6_death2" >Yes… Going back to the zombies where you ESCAPED from is a good idea, </string>
-    <string name="p6_death3" >Yeah, fight the zombie horde *ALONE*, THAT\'s a good idea, </string>
-    <string name="p6_death4" >You do know that so many people AND zombies are at the supermarket, </string>
+    <string name="p6_death2" >Yes… Going back to the zombies where you ESCAPED from is a good idea. </string>
+    <string name="p6_death3" >Yeah, fight the zombie horde *ALONE*. THAT\'s a good idea. </string>
+    <string name="p6_death4" >You do know that so many people AND zombies are at the supermarket. </string>
 
 
 
     <!-- Strings used for Page 7 -->
     <string name="p7_dialogue1">They kindly help you and let you in their van.</string>
-    <string name="p7_dialogue2">*CRASH*</string>
+    <string name="p7_dialogue2">-CRASH-</string>
     <string name="p7_dialogue3">But they made an accident and you are now stranded. </string>
     <string name="p7_decision" >What will you do?
         \n
         \n 1. Stay in the car.
-        \n 2. Use your food and look for shelter.
+        \n 2. Use your food and look for shelter. (Only if you went to the kitchen)
         \n 3. Fight the zombies.
         \n 4. Just. Run. </string>
 
+
+    <string name="p7_death1" > Think, %1$s. Think!  </string>
     <string name="p7_death3" > You vs thousands of zombies.
         \n Seems possible.  </string>
     <string name="p7_death4" > I don\'t think you know where to run.
-        \n
         \n Do you?</string>
+
+
+    <string name="p7win_dialogue1"> You grabbed your stuff, got out the van and ran to find shelter… </string>
+    <string name="p7win_dialogue2"> What ever happened to your new \'friend\'? But that doesn\'t matter now, does it? </string>
+    <string name="p7win_dialogue3"> After running for some time, you find yourself deep in some woods and found a cabin… </string>
+    <string name="p7win_dialogue4"> You explore in and out of the cabin and found nothing and no one. </string>
+    <string name="p7win_dialogue5"> You decide to spend your days and nights in the cabin for now… </string>
+    <string name="p7win_dialogue6"> Well done, you survived the first night of many in the zombie apocalypse.</string>
 
 </resources>

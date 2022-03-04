@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,11 +24,10 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
-import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
+import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
-public class Page4 extends AppCompatActivity implements View.OnClickListener{
+public class Page4 extends AppCompatActivity implements View.OnClickListener, ServiceConnection{
 
 
     ImageView darkShade4;
@@ -33,16 +35,15 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
     ImageButton btn4Choice1, btn4Choice2, btn4Choice3, btn4Choice4, btn4Restart;
     VideoView death4;
     MediaController mediaController;
+    MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent svc, page5, page6, intro;
+    Intent page5, page6, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page4";
 
-
     AlphaAnimation fadeIn;
-
     ObjectAnimator darkFadeIn;
 
     @Override
@@ -78,8 +79,6 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
 
         Log.d(TAG, "The user's name is " + userName + ".");
 
-        svc = new Intent(this, MediaPlayerService.class);
-
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
         btn4Choice1.setOnClickListener(this);
@@ -87,6 +86,10 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
         btn4Choice3.setOnClickListener(this);
         btn4Choice4.setOnClickListener(this);
         btn4Restart.setOnClickListener(this);
+
+        //Binding to music service to allow music to unpause. Refer to onServiceConnected method
+        Intent musicIntent = new Intent(this, MusicPlayerService.class);
+        bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death4.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
         mediaController = new MediaController(this); //link mediaController to videoView
@@ -147,7 +150,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopService(svc); // stop music
+                        musicPlayerService.pauseMusic();
 
                         death4.setVisibility(View.VISIBLE);
                         death4.startAnimation(fadeIn); // video fades in
@@ -158,6 +161,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp)
                             {
+                                musicPlayerService.unpauseMusic();
                                 txt4Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt4Dialogue.setText(R.string.p4_death1);
 
@@ -179,7 +183,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopService(svc);
+                        musicPlayerService.pauseMusic();
 
                         death4.setVisibility(View.VISIBLE);
                         death4.startAnimation(fadeIn); // video fades in
@@ -190,6 +194,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp)
                             {
+                                musicPlayerService.unpauseMusic();
                                 txt4Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt4Dialogue.setText(R.string.p4_death2);
 
@@ -204,6 +209,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             // 3. Go to your room.
             case R.id.btn4Choice3:
                 page5 = new Intent(getApplicationContext(), Page5.class);
+                finish();
                 page5.putExtra("user", userName);
                 page5.putExtra("supplies", inventory);
                 startActivity(page5); // moves to page 5 activity
@@ -213,6 +219,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             // 4. Go outside your house.
             case R.id.btn4Choice4:
                 page6 = new Intent(getApplicationContext(), Page6.class);
+                finish();
                 page6.putExtra("user", userName);
                 page6.putExtra("supplies", inventory);
                 startActivity(page6); // moves to page 6 activity
@@ -337,6 +344,37 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
                 return false;
             }
         });
+
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(musicPlayerService!=null){
+            musicPlayerService.pauseMusic();
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(musicPlayerService!=null){
+            musicPlayerService.unpauseMusic();
+        }
+    }
+
+
+    @Override
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+        MusicPlayerService.MyBinder binder = (MusicPlayerService.MyBinder) iBinder;
+        if(binder != null) {
+            musicPlayerService = binder.getService();
+            musicPlayerService.unpauseMusic();
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName componentName) {
 
     }
 
