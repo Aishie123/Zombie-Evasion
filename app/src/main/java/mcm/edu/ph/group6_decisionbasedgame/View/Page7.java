@@ -28,15 +28,15 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
-    ImageView darkShade7;
+    ImageView darkShade7, bgPage7;
     TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
     ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
     VideoView death7;
     MediaController mediaController;
     Handler handler;
-    Intent svc, page4, intro;
+    Intent svc, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page7";
 
@@ -44,6 +44,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
     ObjectAnimator darkFadeIn;
 
+    @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -53,13 +54,12 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide(); //hide the action bar
 
-        setContentView(R.layout.activity_page1);
+        setContentView(R.layout.activity_page7);
 
 
         //initializing components
-        darkShade7 = findViewById(R.id.darkShade1);
-
-
+        darkShade7 = findViewById(R.id.darkShade7);
+        bgPage7 = findViewById(R.id.bgPage7);
         btn7Choice1 = findViewById(R.id.btn7Choice1);
         btn7Choice2 = findViewById(R.id.btn7Choice2);
         btn7Choice3 = findViewById(R.id.btn7Choice3);
@@ -79,6 +79,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         userName = i.getExtras().getString("user");
         inventory = i.getExtras().getBoolean("supplies");
         Log.d(TAG, "The user's name is " + userName + ".");
+        Log.d(TAG, "Inventory is" + String.valueOf(inventory));
 
 
         svc = new Intent(this, MediaPlayerService.class);
@@ -104,9 +105,16 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         // text from 0% (0f) to 100% (1f)
         fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
 
-        darkFadeIn = ObjectAnimator.ofFloat(darkShade7,"alpha",0.7f, 1f);
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade7,"alpha",0.5f, 1f);
         // transition to make the dark screen at the front of BG even darker after death
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
+
+        if (inventory == true) {
+            btn7Choice2.setEnabled(true);
+        }
+        else if (inventory == false) {
+            btn7Choice2.setEnabled(false);
+        }
 
         hideButtons(); // hide choices
         opening(); // start opening dialogue
@@ -114,7 +122,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
         // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
     }
 
-// BEDROOM SCENE - STARTING PAGE
+// CRASHED VAN SCENE - STARTING PAGE
 
     // opening dialogue
     @SuppressLint("SetTextI18n")
@@ -129,38 +137,40 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
             public void run() {
                 txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt7Dialogue.setText(R.string.p7_dialogue2);
+                bgPage7.setImageResource(R.drawable.bg_burningvan); // change to burning van bg
 
-                // the code inside handler will run after the 7-sec delay
+                // the code inside handler will run after the 2.5-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
-                        txt7Dialogue.setText(R.string.p7_decision);
+                        txt7Dialogue.setText(R.string.p7_dialogue3);
 
-                        showButtons(); //show choices
-                    }
-                }, 7000); // 7 seconds delay
-            }
-        }, 4000); // 4 seconds delay
+                // the code inside handler will run after the 4-sec delay
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt7Dialogue.setText(R.string.p7_decision);
+
+                                showButtons(); //show choices
+                             }
+                         }, 4000); // 4 seconds delay
+                     }
+                 }, 2500); // 2.5 seconds delay
+             }
+         }, 4000); // 4 seconds delay
     }
 
 
     // actions after player makes a decision and clicks a button -------------------------------------------------------
-    @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
     @SuppressLint("NonConstantResourceId")
     public void onClick(View v){
-
-        if (inventory == true) {
-            btn7Choice2.setEnabled(true);
-        }
-        else if (inventory == false) {
-            btn7Choice2.setEnabled(false);
-        }
-
         switch (v.getId()){
 
             // 1. Stay in the car.
             case R.id.btn7Choice1:
+
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
                 txt7Dialogue.setText(""); // makes dialogue empty
@@ -179,8 +189,10 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
                             @SuppressLint("SetTextI18n")
                             public void onCompletion(MediaPlayer mp)
                             {
+                                String strP7D1F = getResources().getString(R.string.p7_death1);
+                                String strP7D1M = String.format(strP7D1F, userName);
                                 txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
-                                txt7Dialogue.setText("Think" + userName + "Think!");
+                                txt7Dialogue.setText(strP7D1M);
 
                                 death7.setVisibility(View.GONE); // removes video
                                 showRestartButton();
@@ -194,13 +206,71 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
             // 2. Grab your stuff and find a shelter.
             case R.id.btn7Choice2:
 
+                hideButtons(); // hide choices
+                darkFadeIn.start(); // covers the screen with a black shape
+                txt7Dialogue.setText(""); // makes dialogue empty
 
+                // the code inside handler will run after the 6-sec delay
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                            txt7Dialogue.setText(R.string.p7win_dialogue1);
 
+                            // the code inside handler will run after the 6-sec delay
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt7Dialogue.setText(R.string.p7win_dialogue2);
 
+                                    // the code inside handler will run after the 6-sec delay
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                            txt7Dialogue.setText(R.string.p7win_dialogue3);
+
+                                            // the code inside handler will run after the 6-sec delay
+                                            handler.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                    txt7Dialogue.setText(R.string.p7win_dialogue4);
+
+                                                    // the code inside handler will run after the 6-sec delay
+                                                    handler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                            txt7Dialogue.setText(R.string.p7win_dialogue5);
+
+                                                            // the code inside handler will run after the 6-sec delay
+                                                            handler.postDelayed(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                                                    txt7Dialogue.setText(R.string.p7win_dialogue6);
+                                                                    showRestartButton();
+                                                                    txt7Restart.setText("Play Again");
+                                                        }
+                                                    }, 4000); // 4 seconds delay
+                                                }
+                                            }, 4000); // 4 seconds delay
+                                        }
+                                    }, 4000); // 4 seconds delay
+                                }
+                            }, 4000); // 4 seconds delay
+                        }
+                    }, 4000); // 4 seconds delay
+
+                    }
+                    }, 4000); // 4 seconds delay
                 break;
 
             // 3. Fight the zombies
             case R.id.btn7Choice3:
+
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
                 txt7Dialogue.setText(""); // makes dialogue empty
@@ -232,6 +302,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
             // 4. R U N.
             case R.id.btn7Choice4:
+
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
                 txt7Dialogue.setText(""); // makes dialogue empty
@@ -264,6 +335,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener{
 
             // If reset button is pressed
             case R.id.btn7Restart:
+
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
                 finish();
                 startActivity(intro); // moves back to intro screen

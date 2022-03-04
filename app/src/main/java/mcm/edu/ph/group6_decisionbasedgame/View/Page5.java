@@ -2,13 +2,48 @@ package mcm.edu.ph.group6_decisionbasedgame.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.VideoView;
 
+import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
+import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
+import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
-public class Page5 extends AppCompatActivity {
+public class Page5 extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView darkShade5;
+    TextView txt5Dialogue, txt5Choice1, txt5Choice2, txt5Choice3,txt5Choice4, txt5Restart;
+    ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
+    VideoView death5;
+    MediaController mediaController;
+    Handler handler;
+    Intent svc, page6, intro;
+
+    boolean inventory, alive;
+    String userName;
+    String TAG = "Page5";
+
+    GameController randomizer = new GameController();
+
+    AlphaAnimation fadeIn;
+    ObjectAnimator darkFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +54,373 @@ public class Page5 extends AppCompatActivity {
         getSupportActionBar().hide(); //hide the action bar
 
         setContentView(R.layout.activity_page5);
+
+        //initializing components
+        darkShade5 = findViewById(R.id.darkShade5);
+        btn5Choice1 = findViewById(R.id.btn5Choice1);
+        btn5Choice2 = findViewById(R.id.btn5Choice2);
+        btn5Choice3 = findViewById(R.id.btn5Choice3);
+        btn5Choice4 = findViewById(R.id.btn5Choice4);
+        btn5Restart = findViewById(R.id.btn5Restart);
+        txt5Dialogue = findViewById(R.id.txt5Dialogue);
+        txt5Choice1 = findViewById(R.id.txt5Choice1);
+        txt5Choice2 = findViewById(R.id.txt5Choice2);
+        txt5Choice3 = findViewById(R.id.txt5Choice3);
+        txt5Choice4 = findViewById(R.id.txt5Choice4);
+        txt5Restart = findViewById(R.id.txt5Restart);
+        death5 = findViewById(R.id.death5);
+
+
+        // receiving user input from intro screen
+        Intent i = getIntent();
+        userName = i.getExtras().getString("user");
+        inventory = i.getExtras().getBoolean("supplies");
+        Log.d(TAG, "The user's name is " + userName + ".");
+
+        svc = new Intent(this, MediaPlayerService.class);
+
+        // setting listeners for the choice buttons
+        // this will detect whether a button is clicked or not
+        btn5Choice1.setOnClickListener(this);
+        btn5Choice2.setOnClickListener(this);
+        btn5Choice3.setOnClickListener(this);
+        btn5Choice4.setOnClickListener(this);
+        btn5Restart.setOnClickListener(this);
+
+
+        death5.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
+        mediaController = new MediaController(this); //link mediaController to videoView
+        mediaController.setAnchorView(death5); //allow mediaController to control our videoView
+        death5.setMediaController(mediaController);
+
+
+        handler = new Handler(Looper.getMainLooper()); // for delay
+
+        fadeIn = new AlphaAnimation(0f , 1f); // this creates a fade in transition
+        // by turning the opacity (alpha) of the
+        // text from 0% (0f) to 100% (1f)
+        fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
+
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade5,"alpha",0.8f, 1f);
+        // transition to make the dark screen at the front of BG even darker after death
+        darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
+
+        hideButtons(); // hide choices
+        dialogue(); // start opening dialogue
+        press(); // calls method that detects if buttons are pressed,
+        // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
+
     }
 
-    // ALVIN VICENTE'S TASK
-    // YOU HEAR ZOMBIES BANGING ON YOUR DOOR
+    @SuppressLint("SetTextI18n")
+    public void dialogue(){
+
+        txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+        txt5Dialogue.setText(R.string.p5_dialogue1);
+
+        // the code inside handler will run after the 2-sec delay
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                txt5Dialogue.setText(R.string.p5_decision);
+                showButtons(); //show choices
+            }
+        }, 2000); // 2 seconds delay
+
+    }
+
+
+    // actions after player makes a decision and clicks a button -------------------------------------------------------
+    @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
+    @SuppressLint("NonConstantResourceId")
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            // 1. Fight.
+            case R.id.btn5Choice1:
+
+                if (inventory == true) {
+                    txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt5Dialogue.setText(R.string.p5_alive1);
+
+                    // the code inside handler will run after the 2-sec delay
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            goOutside();
+                        }
+                    }, 2000); // 2 seconds delay
+
+                }
+
+                else {
+                    hideButtons(); // hide choices
+                    darkFadeIn.start(); // covers the screen with a black shape
+                    txt5Dialogue.setText(""); // makes dialogue empty
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            stopService(svc);
+
+                            death5.setVisibility(View.VISIBLE);
+                            death5.startAnimation(fadeIn); // video fades in
+                            death5.start(); // play video
+
+                            death5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @SuppressLint("SetTextI18n")
+                                public void onCompletion(MediaPlayer mp) {
+                                    txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt5Dialogue.setText(R.string.p5_death1);
+
+                                    death5.setVisibility(View.GONE); // removes video
+                                    showRestartButton();
+                                }
+                            });
+                        }
+                    }, 1500); // 1 and a half seconds delay
+                }
+
+                break;
+
+            // 2. Jump from your room's window.
+            case R.id.btn5Choice2:
+
+                alive = randomizer.randomizeSurvival();
+
+                if (alive == true) {
+                    txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                    txt5Dialogue.setText(R.string.p5_alive2);
+
+                    // the code inside handler will run after the 2-sec delay
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            goOutside();
+                        }
+                    }, 2000); // 2 seconds delay
+                }
+
+                else if (alive == false){ // If user dies
+                    hideButtons(); // hide choices
+                    darkFadeIn.start(); // covers the screen with a black shape
+                    txt5Dialogue.setText(""); // makes dialogue empty
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            stopService(svc); // stop music
+
+                            death5.setVisibility(View.VISIBLE);
+                            death5.startAnimation(fadeIn); // video fades in
+                            death5.start(); // play video
+
+                            death5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @SuppressLint("SetTextI18n")
+                                public void onCompletion(MediaPlayer mp) {
+                                    txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                    txt5Dialogue.setText(R.string.p5_death2);
+
+                                    death5.setVisibility(View.GONE); // removes video
+                                    showRestartButton();
+                                }
+                            });
+                        }
+                    }, 1500); // 1 and a half seconds delay
+                }
+
+                break;
+
+
+            // 3. Pray.
+            case R.id.btn5Choice3:
+                hideButtons(); // hide choices
+                darkFadeIn.start(); // covers the screen with a black shape
+                txt5Dialogue.setText(""); // makes dialogue empty
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopService(svc); // stop music
+
+                        death5.setVisibility(View.VISIBLE);
+                        death5.startAnimation(fadeIn); // video fades in
+                        death5.start(); // play video
+
+                        death5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @SuppressLint("SetTextI18n")
+                            public void onCompletion(MediaPlayer mp) {
+                                txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt5Dialogue.setText(R.string.p5_death3);
+
+                                death5.setVisibility(View.GONE); // removes video
+                                showRestartButton();
+                            }
+                        });
+                    }
+                }, 1500); // 1 and a half seconds delay
+                break;
+
+            // 4. R U N.
+            case R.id.btn5Choice4:
+                hideButtons(); // hide choices
+                darkFadeIn.start(); // covers the screen with a black shape
+                txt5Dialogue.setText(""); // makes dialogue empty
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopService(svc); // stop music
+
+                        death5.setVisibility(View.VISIBLE);
+                        death5.startAnimation(fadeIn); // video fades in
+                        death5.start(); // play video
+
+                        death5.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @SuppressLint("SetTextI18n")
+                            public void onCompletion(MediaPlayer mp) {
+                                txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
+                                txt5Dialogue.setText(R.string.p5_death4);
+
+                                death5.setVisibility(View.GONE); // removes video
+                                showRestartButton();
+                            }
+                        });
+                    }
+                }, 1500); // 1 and a half seconds delay
+                break;
+
+
+            // If restart button is pressed
+            case R.id.btn5Restart:
+                intro = new Intent(getApplicationContext(), IntroScreen.class);
+                finish();
+                startActivity(intro); // moves back to intro screen
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
+                break;
+
+        }
+    }
+
+
+    // call this method to proceed to page 6
+    public void goOutside(){
+        page6 = new Intent(getApplicationContext(), Page6.class);
+        finish();
+        page6.putExtra("user", userName);
+        page6.putExtra("supplies", inventory);
+        startActivity(page6); // moves to page 6 activity
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        // fade transitions when moving to the next activity
+    }
+
+    // call this method to show restart button  ------------------------------------------------------------------------
+    public void showRestartButton(){
+        btn5Restart.setVisibility(View.VISIBLE);
+        txt5Restart.setVisibility(View.VISIBLE);
+    }
+
+
+    // call this method to hide choice buttons  ------------------------------------------------------------------------
+    public void hideButtons() {
+        btn5Choice1.setVisibility(View.GONE);
+        btn5Choice2.setVisibility(View.GONE);
+        btn5Choice3.setVisibility(View.GONE);
+        btn5Choice4.setVisibility(View.GONE);
+        txt5Choice1.setVisibility(View.GONE);
+        txt5Choice2.setVisibility(View.GONE);
+        txt5Choice3.setVisibility(View.GONE);
+        txt5Choice4.setVisibility(View.GONE);
+
+    }
+
+    // call this method to show choice buttons  -----------------------------------------------------------------------
+    public void showButtons() {
+        btn5Choice1.setVisibility(View.VISIBLE);
+        btn5Choice2.setVisibility(View.VISIBLE);
+        btn5Choice3.setVisibility(View.VISIBLE);
+        btn5Choice4.setVisibility(View.VISIBLE);
+        txt5Choice1.setVisibility(View.VISIBLE);
+        txt5Choice2.setVisibility(View.VISIBLE);
+        txt5Choice3.setVisibility(View.VISIBLE);
+        txt5Choice4.setVisibility(View.VISIBLE);
+    }
+
+
+    //changing button images when pressed -----------------------------------------------------------------------------------------
+    @SuppressLint("ClickableViewAccessibility")
+    public void press() {
+
+        btn5Choice1.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn5Choice1.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn5Choice1.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn5Choice2.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn5Choice2.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn5Choice2.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn5Choice3.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn5Choice3.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn5Choice3.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+        btn5Choice4.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn5Choice4.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn5Choice4.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+        btn5Restart.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                // when pressed
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    btn5Restart.setImageResource(R.drawable.btn_pressed);
+                }
+                // when not pressed
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    btn5Restart.setImageResource(R.drawable.btn_unpressed);
+                }
+                return false;
+            }
+        });
+
+    }
 
 }

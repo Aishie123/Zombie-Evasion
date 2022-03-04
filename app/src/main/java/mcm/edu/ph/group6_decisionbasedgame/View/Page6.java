@@ -34,7 +34,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
     Handler handler;
     Intent svc, page7, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page6";
 
@@ -105,7 +105,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
         // text from 0% (0f) to 100% (1f)
         fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
 
-        darkFadeIn = ObjectAnimator.ofFloat(darkShade6, "alpha", 0.7f, 1f);
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade6, "alpha", 0.5f, 1f);
         // transition to make the dark screen at the front of BG even darker after death
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 
@@ -146,6 +146,8 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener {
             // 1. Ask for help.
             case R.id.btn6Choice1:
                 page7 = new Intent(getApplicationContext(), Page7.class);
+                finish();
+                page7.putExtra("user", userName);
                 page7.putExtra("supplies", inventory);
                 startActivity(page7); // moves to page 7 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity

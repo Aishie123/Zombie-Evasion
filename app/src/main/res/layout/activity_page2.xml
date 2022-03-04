@@ -7,7 +7,7 @@
     tools:context=".View.Page2">
 
     <ImageView
-        android:id="@+id/bg2Kitchen"
+        android:id="@+id/bgPage2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn2Choice1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bg2Kitchen"
+        app:layout_constraintTop_toTopOf="@+id/bgPage2"
         app:layout_constraintVertical_chainStyle="spread" />
 
 
@@ -49,10 +49,10 @@
         android:layout_height="60dp"
         android:padding="0dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/bg2Kitchen"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPage2"
         app:layout_constraintEnd_toStartOf="@+id/btn2Choice2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bg2Kitchen"
+        app:layout_constraintStart_toEndOf="@+id/bgPage2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt2Dialogue"
         app:srcCompat="@drawable/btn_unpressed"
@@ -157,7 +157,7 @@
         android:padding="0dp"
         android:scaleType="fitXY"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/bg2Kitchen"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPage2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/btn_unpressed"

@@ -35,12 +35,11 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
     Handler handler;
     Intent svc, page2, page3, page6, intro;
 
-    Boolean inventory = false;
+    boolean inventory = false;
     String userName;
     String TAG = "Page1";
 
     AlphaAnimation fadeIn;
-
     ObjectAnimator darkFadeIn;
 
     @Override
@@ -102,7 +101,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener{
                                             // text from 0% (0f) to 100% (1f)
         fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
 
-        darkFadeIn = ObjectAnimator.ofFloat(darkShade1,"alpha",0.7f, 1f);
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade1,"alpha",0.8f, 1f);
         // transition to make the dark screen at the front of BG even darker after death
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 

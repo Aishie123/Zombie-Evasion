@@ -35,7 +35,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
     Handler handler;
     Intent svc, page4, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page4";
 
@@ -101,7 +101,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
         // text from 0% (0f) to 100% (1f)
         fadeIn.setDuration(2000); // setting duration of transition, which is 2 seconds
 
-        darkFadeIn = ObjectAnimator.ofFloat(darkShade2,"alpha",0.7f, 1f);
+        darkFadeIn = ObjectAnimator.ofFloat(darkShade2,"alpha",0.8f, 1f);
         // transition to make the dark screen at the front of BG even darker after death
         darkFadeIn.setDuration(1000); // setting the fade in duration to 1 second for the black screen
 
@@ -243,6 +243,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener {
             case R.id.btn2Choice4:
                 inventory = true;
                 page4 = new Intent(getApplicationContext(), Page4.class);
+                finish();
                 page4.putExtra("user", userName);
                 page4.putExtra("supplies", inventory);
                 startActivity(page4); // moves to page 6 activity

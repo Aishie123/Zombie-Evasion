@@ -21,6 +21,7 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MediaPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
@@ -36,13 +37,11 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
     Handler handler;
     Intent svc, page5, page6, intro;
 
-    Boolean inventory;
+    boolean inventory;
     String userName;
     String TAG = "Page4";
 
-
     AlphaAnimation fadeIn;
-
     ObjectAnimator darkFadeIn;
 
     @Override
@@ -204,6 +203,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             // 3. Go to your room.
             case R.id.btn4Choice3:
                 page5 = new Intent(getApplicationContext(), Page5.class);
+                finish();
                 page5.putExtra("user", userName);
                 page5.putExtra("supplies", inventory);
                 startActivity(page5); // moves to page 5 activity
@@ -213,6 +213,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener{
             // 4. Go outside your house.
             case R.id.btn4Choice4:
                 page6 = new Intent(getApplicationContext(), Page6.class);
+                finish();
                 page6.putExtra("user", userName);
                 page6.putExtra("supplies", inventory);
                 startActivity(page6); // moves to page 6 activity
