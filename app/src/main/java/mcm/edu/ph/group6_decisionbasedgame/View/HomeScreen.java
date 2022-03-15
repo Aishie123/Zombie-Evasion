@@ -129,7 +129,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     public void onResume(){
         super.onResume();
         if(musicPlayerService!=null){
-            if(musicPlayerService.currentTrack ==1){
+            if(musicPlayerService.currentTrack == 1){
                 musicPlayerService.unpauseMusic();
             }else{
                 musicPlayerService.playMusic(1);

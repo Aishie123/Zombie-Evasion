@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -33,6 +34,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
     TextView txt3Dialogue, txt3Choice1, txt3Choice2, txt3Choice3,txt3Choice4, txt3Restart;
     ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
     VideoView death3;
+    MediaPlayer endCallSFX, zombieSFX;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
@@ -120,7 +122,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
         txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
         txt3Dialogue.setText(R.string.p3_dialogue1);
 
-                // the code inside handler will run after the 2-sec delay
+                // the code inside handler will run after the 3-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -129,7 +131,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
 
                         showButtons(); //show choices
                     }
-                }, 2000); // 2 seconds delay
+                }, 3000); // 3 seconds delay
     }
 
 
@@ -166,29 +168,33 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                     txt3Dialogue.setText(strP3PR3M);
 
-                                    // the code inside handler will run after the 2-sec delay
+                                    // the code inside handler will run after the 3-sec delay
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
                                             txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                             txt3Dialogue.setText(R.string.p3_policeR4);
 
-                                            // the code inside handler will run after the 2-sec delay
+                                            // the code inside handler will run after the 3-sec delay
                                             handler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
+                                                    musicPlayerService.pauseMusic();
+                                                    playEndCallSFX();
                                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                     txt3Dialogue.setText(R.string.p3_policeR5);
 
-                                                    // the code inside handler will run after the 2-sec delay
+                                                    // the code inside handler will run after the 3-sec delay
                                                     handler.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
+                                                            endCallSFX.release();
+                                                            musicPlayerService.unpauseMusic();
                                                             moveToP5();
                                                         }
-                                                    }, 2000); // 2 seconds delay
+                                                    }, 3000); // 3 seconds delay
                                                 }
-                                            }, 2000); // 2 seconds delay
+                                            }, 3000); // 3 seconds delay
 
                                         }
                                     }, 7000); // 7 seconds delay
@@ -197,21 +203,25 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                             }, 3000); // 3 seconds delay
 
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 3000); // 3 seconds delay
 
                 }
 
                 // if police doesn't respond
                 else if (response == false) {
+                    musicPlayerService.pauseMusic();
+                    playEndCallSFX();
                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                     txt3Dialogue.setText(R.string.p3_policeI);
 
-                    // the code inside handler will run after the 2-sec delay
+                    // the code inside handler will run after the 4-sec delay
                     handler.postDelayed(new Runnable() {
                         public void run() {
+                            endCallSFX.release();
+                            musicPlayerService.unpauseMusic();
                             moveToP5();
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 4000); // 4 seconds delay
                 }
 
             break;
@@ -235,16 +245,20 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                musicPlayerService.pauseMusic();
+                                playEndCallSFX();
                                 txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt3Dialogue.setText(R.string.p3_friend3);
 
-                                // the code inside handler will run after the 2-sec delay
+                                // the code inside handler will run after the 3-sec delay
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
+                                        endCallSFX.release();
+                                        musicPlayerService.unpauseMusic();
                                         moveToP5();
                                     }
-                                }, 2000); // 2 seconds delay
+                                }, 3000); // 3 seconds delay
                             }
                         }, 7000); // 7 seconds delay
 
@@ -264,21 +278,21 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                     txt3Dialogue.setText(R.string.p3_sister1);
 
-                    // the code inside handler will run after the 2-sec delay
+                    // the code inside handler will run after the 3-sec delay
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                             txt3Dialogue.setText(R.string.p3_sister2);
 
-                            // the code inside handler will run after the 2-sec delay
+                            // the code inside handler will run after the 3-sec delay
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                     txt3Dialogue.setText(R.string.p3_sister3);
 
-                                    // the code inside handler will run after the 2-sec delay
+                                    // the code inside handler will run after the 3-sec delay
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -287,7 +301,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                             txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                             txt3Dialogue.setText(strP3S4M);
 
-                                            // the code inside handler will run after the 3-sec delay
+                                            // the code inside handler will run after the 4-sec delay
                                             handler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -296,35 +310,39 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                     txt3Dialogue.setText(strP3S5M);
 
-                                                    // the code inside handler will run after the 2-sec delay
+                                                    // the code inside handler will run after the 3-sec delay
                                                     handler.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
+                                                            musicPlayerService.pauseMusic();
+                                                            playEndCallSFX();
                                                             txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                             txt3Dialogue.setText(userName + R.string.p3_sister6);
 
-                                                            // the code inside handler will run after the 2-sec delay
+                                                            // the code inside handler will run after the 3-sec delay
                                                             handler.postDelayed(new Runnable() {
                                                                 @Override
                                                                 public void run() {
+                                                                    endCallSFX.release();
+                                                                    musicPlayerService.unpauseMusic();
                                                                     moveToP5();
                                                                 }
-                                                            }, 2000); // 2 seconds delay
+                                                            }, 3000); // 3 seconds delay
 
                                                         }
-                                                    }, 2000); // 2 seconds delay
+                                                    }, 3000); // 3 seconds delay
 
                                                 }
-                                            }, 3000); // 3 seconds delay
+                                            }, 4000); // 4 seconds delay
 
                                         }
-                                    }, 2000); // 2 seconds delay
+                                    }, 3000); // 3 seconds delay
 
                                 }
-                            }, 2000); // 2 seconds delay
+                            }, 3000); // 3 seconds delay
 
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 3000); // 3 seconds delay
 
                 }
 
@@ -332,7 +350,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                     txt3Dialogue.setText(R.string.p3_brother1);
 
-                    // the code inside handler will run after the 2-sec delay
+                    // the code inside handler will run after the 3-sec delay
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -346,7 +364,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                     txt3Dialogue.setText(R.string.p3_brother3);
 
-                                    // the code inside handler will run after the 2-sec delay
+                                    // the code inside handler will run after the 3-sec delay
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -364,35 +382,39 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                                     txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                     txt3Dialogue.setText(strP3B5M);
 
-                                                    // the code inside handler will run after the 2-sec delay
+                                                    // the code inside handler will run after the 3-sec delay
                                                     handler.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
+                                                            musicPlayerService.pauseMusic();
+                                                            playEndCallSFX();
                                                             txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                             txt3Dialogue.setText(R.string.p3_brother6);
 
-                                                            // the code inside handler will run after the 2-sec delay
+                                                            // the code inside handler will run after the 3-sec delay
                                                             handler.postDelayed(new Runnable() {
                                                                 @Override
                                                                 public void run() {
+                                                                    endCallSFX.release();
+                                                                    musicPlayerService.unpauseMusic();
                                                                     moveToP5();
                                                                 }
-                                                            }, 2000); // 2 seconds delay
+                                                            }, 3000); // 3 seconds delay
 
                                                         }
-                                                    }, 2000); // 2 seconds delay
+                                                    }, 3000); // 3 seconds delay
 
                                                 }
                                             }, 4000); // 4 seconds delay
 
                                         }
-                                    }, 2000); // 2 seconds delay
+                                    }, 3000); // 3 seconds delay
 
                                 }
                             }, 4000); // 4 seconds delay
 
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 3000); // 3 seconds delay
 
                 }
 
@@ -404,7 +426,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                 txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt3Dialogue.setText(R.string.p3_parents1);
 
-                // the code inside handler will run after the 2-sec delay
+                // the code inside handler will run after the 3-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -413,24 +435,28 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                         txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                         txt3Dialogue.setText(strP3P2M);
 
-                        // the code inside handler will run after the 2-sec delay
+                        // the code inside handler will run after the 3-sec delay
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                 txt3Dialogue.setText(R.string.p3_parents3);
 
-                                // the code inside handler will run after the 2-sec delay
+                                // the code inside handler will run after the 3-sec delay
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
+                                        musicPlayerService.pauseMusic();
+                                        playZombieSFX();
                                         txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                         txt3Dialogue.setText(R.string.p3_parents4);
 
-                                        // the code inside handler will run after the 2-sec delay
+                                        // the code inside handler will run after the 3-sec delay
                                         handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
+                                                musicPlayerService.unpauseMusic();
+                                                zombieSFX.release();
                                                 txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                 txt3Dialogue.setText(R.string.p3_parents5);
 
@@ -438,32 +464,49 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                                 handler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
+                                                        musicPlayerService.pauseMusic();
+                                                        playEndCallSFX();
                                                         txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                         txt3Dialogue.setText(R.string.p3_parents6);
 
-                                                        // the code inside handler will run after the 2-sec delay
+                                                        // the code inside handler will run after the 3-sec delay
                                                         handler.postDelayed(new Runnable() {
                                                             @Override
                                                             public void run() {
+                                                                endCallSFX.release();
+                                                                musicPlayerService.unpauseMusic();
                                                                 moveToP5();
                                                             }
-                                                        }, 2000); // 2 seconds delay
+                                                        }, 3000); // 3 seconds delay
                                                     }
                                                 }, 4000); // 4 seconds delay
                                             }
-                                        }, 2000); // 2 seconds delay
+                                        }, 3000); // 3 seconds delay
                                     }
-                                }, 2000); // 2 seconds delay
+                                }, 3000); // 3 seconds delay
                             }
-                        }, 2000); // 2 seconds delay
+                        }, 3000); // 3 seconds delay
                     }
-                }, 2000); // 2 seconds delay
+                }, 3000); // 3 seconds delay
 
             break;
 
         }
     }
 
+    public void playZombieSFX(){
+        zombieSFX = MediaPlayer.create(this, R.raw.sfx_zombiebanging);
+        zombieSFX.setVolume(100,100);
+        zombieSFX.setLooping(false);
+        zombieSFX.start();
+    }
+
+    public void playEndCallSFX(){
+        endCallSFX = MediaPlayer.create(this, R.raw.sfx_endcall);
+        endCallSFX.setVolume(100,100);
+        endCallSFX.setLooping(false);
+        endCallSFX.start();
+    }
 
     // call this method to proceed to page 5 ------------------------------------------------------------------------
     public void moveToP5(){

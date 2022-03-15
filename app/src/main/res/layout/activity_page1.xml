@@ -24,8 +24,8 @@
         android:layout_height="match_parent"
         android:alpha="0.8"
         android:src="@drawable/darkshade"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="-53dp"
+        tools:layout_editor_absoluteY="-37dp" />
 
     <TextView
         android:id="@+id/txt1Dialogue"
@@ -146,6 +146,18 @@
         app:layout_constraintStart_toStartOf="@+id/btn1Choice4"
         app:layout_constraintTop_toTopOf="@+id/btn1Choice4"
         tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/btnHome1"
+        android:layout_width="47dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051"
+        app:srcCompat="@drawable/btn_home" />
 
     <ImageButton
         android:id="@+id/btn1Restart"

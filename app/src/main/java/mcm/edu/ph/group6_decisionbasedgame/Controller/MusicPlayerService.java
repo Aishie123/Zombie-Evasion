@@ -43,6 +43,7 @@ public class MusicPlayerService extends Service {
             @Override
             public void run() {
                 if(music == 1) playMainMusic();
+                if(music == 2) playCrashSFX();
             }
         }).start();
     }
@@ -58,6 +59,18 @@ public class MusicPlayerService extends Service {
         player.start();
 
     }
+
+    public void playCrashSFX(){
+        if(player !=null){
+            player.stop();
+            player.release();
+        }
+        player = MediaPlayer.create(this, R.raw.sfx_carcrash);
+        currentTrack = 2;
+        player.setLooping(false);
+        player.start();
+    }
+
 
     public void pauseMusic(){
         player.pause();

@@ -36,6 +36,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
     TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
     ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
     VideoView death7;
+    MediaPlayer crashSFX;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
@@ -120,7 +121,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         }
 
         hideButtons(); // hide choices
-        opening(); // start opening dialogue
+        dialogue(); // start opening dialogue
         press(); // calls method that detects if buttons are pressed,
         // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
     }
@@ -129,7 +130,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
 
     // opening dialogue
     @SuppressLint("SetTextI18n")
-    public void opening(){
+    public void dialogue(){
 
         txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
         txt7Dialogue.setText(R.string.p7_dialogue1);
@@ -138,14 +139,20 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                musicPlayerService.pauseMusic();
+                playCrashSFX();
+
                 txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt7Dialogue.setText(R.string.p7_dialogue2);
                 bgPage7.setImageResource(R.drawable.bg_burningvan); // change to burning van bg
 
-                // the code inside handler will run after the 2.5-sec delay
+                // the code inside handler will run after the 3-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        musicPlayerService.unpauseMusic();
+                        crashSFX.release();
+
                         txt7Dialogue.startAnimation(fadeIn); // dialogue fades in
                         txt7Dialogue.setText(R.string.p7_dialogue3);
 
@@ -160,11 +167,17 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
                              }
                          }, 4000); // 4 seconds delay
                      }
-                 }, 2500); // 2.5 seconds delay
+                 }, 3000); // 3 seconds delay
              }
          }, 4000); // 4 seconds delay
     }
 
+    public void playCrashSFX(){
+        crashSFX = MediaPlayer.create(this, R.raw.sfx_carcrash);
+        crashSFX.setVolume(100,100);
+        crashSFX.setLooping(false);
+        crashSFX.start();
+    }
 
     // actions after player makes a decision and clicks a button -------------------------------------------------------
     @SuppressWarnings("ConstantConditions")

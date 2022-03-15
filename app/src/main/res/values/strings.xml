@@ -51,12 +51,13 @@
     <string name="p3_policeR3">%1$s : STAY IN MY HOUSE?
         \n There are literally zombies BARGING into my house and you\'re telling me to STAY INSIDE, TRAPPED?!</string>
     <string name="p3_policeR4">The officer told you to calm down…</string>
-    <string name="p3_policeR5">You stopped the call and-</string>
-    <string name="p3_policeI">You try to call the police but they didn\'t respond…</string>
+    <string name="p3_policeR5">You ended the call and-</string>
+
+    <string name="p3_policeI">You try to call the police, but they didn\'t respond…</string>
 
     <string name="p3_friend1">You decided to call your friend… </string>
     <string name="p3_friend2">Your friend picked up the call.
-    \n but you hear him SCREAMING </string>
+    \n but you hear him SCREAMING! </string>
     <string name="p3_friend3">and suddenly the call disconnected…</string>
 
     <string name="p3_sister1">You decided to call your sister… </string>
@@ -150,6 +151,5 @@
     <string name="p7win_dialogue4"> You explore in and out of the cabin and found nothing and no one. </string>
     <string name="p7win_dialogue5"> You decide to spend your days and nights in the cabin for now… </string>
     <string name="p7win_dialogue6"> Well done, you survived the first night of many in the zombie apocalypse.</string>
-    <string name="developed_by">Developed by:</string>
 
 </resources>
