@@ -116,9 +116,6 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
         // and if pressed, the button's image will change (from an unpressed btn to a pressed btn)
     }
 
-    // BRENT RIVERO'S TASK
-    // YOU SEE SOMEONE IN A VAN THAT IS NOT A ZOMBIE
-
     // page 6 dialogue
     @SuppressLint("SetTextI18n")
     public void dialogue() {
@@ -135,7 +132,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
 
                 showButtons(); //show choices
             }
-        }, 2000); // 2 seconds delay
+        }, 3000); // 3 seconds delay
     }
 
 

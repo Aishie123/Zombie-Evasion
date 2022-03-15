@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="210dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/settingsBox"
         android:layout_width="642dp"
         android:layout_height="360dp"
         android:src="@drawable/txtbox"
@@ -66,7 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/settingsBox"
         app:layout_constraintTop_toTopOf="@+id/bgSettings"
         app:layout_constraintVertical_bias="0.22"
         app:srcCompat="@drawable/btn_back"

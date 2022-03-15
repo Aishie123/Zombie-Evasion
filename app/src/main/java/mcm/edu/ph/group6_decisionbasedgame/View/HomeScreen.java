@@ -37,9 +37,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         btnSettings = findViewById(R.id.btnSettings);
         btnCredits = findViewById(R.id.btnCredits);
 
-        btnCredits.setEnabled(false); // not yet done
-        btnCredits.setAlpha(0.5f);
-
         btnStart.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnCredits.setOnClickListener(this);
@@ -71,12 +68,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
 
-            // temporary
             case R.id.btnCredits:
 
-                goToCredits = new Intent(HomeScreen.this, IntroScreen.class);
+                goToCredits = new Intent(HomeScreen.this, CreditsScreen.class);
                 startActivity(goToCredits);
-                finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
 

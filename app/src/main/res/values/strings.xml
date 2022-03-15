@@ -1,42 +1,45 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Group6_DecisionBasedGame</string>
-    <string name="title_activity_page2">Page2</string>
-
+    <string name="credits">Developed by:
+    \n
+    \n Aisha Nicole L. Dones
+    \n Alfonso Nicolas R. Aguirre
+    \n Alvin John L. Vicente
+    \n Brent Steaven G. Rivero
+    \n Kienth Justine I. Javines</string>
 
     <!-- Strings used for Page 1 -->
     <string name="p1_dialogue1">You wake up at your bed…</string>
     <string name="p1_dialogue2">You hear from your room\'s radio that the global pandemic made humans turn into ZOMBIES.</string>
-    <string name="p1_decision" >What will you do?
+    <string name="p1_decision">What will you do?
         \n
         \n 1. Call somebody for help.
         \n 2. Go to the kitchen.
         \n 3. Go back to sleep.
         \n 4. Go downstairs and look for people around.</string>
 
-    <string name="p1_death" >It\'s the start of the game and you\'re already dead…
+    <string name="p1_death">It\'s the start of the game and you\'re already dead…
         \n You are not good at this.</string>
-
 
 
     <!-- Strings used for Page 2 -->
     <string name="p2_dialogue1">You decided to go to the kitchen.</string>
     <string name="p2_dialogue2">But you hear zombies nearby.</string>
-    <string name="p2_decision" >What will you do?
+    <string name="p2_decision">What will you do?
         \n
         \n 1. Go to the backyard.
         \n 2. Go to the basement.
         \n 3. Stay in the kitchen.
         \n 4. Search for supplies. </string>
 
-    <string name="p2_death1" >Getting yourself trapped in a house with zombies… \n always works… </string>
-    <string name="p2_death2" >Going out in the open without any weapons or whatsoever… \n always works…</string>
-    <string name="p2_death3" >Getting yourself trapped in a house with zombies… \n always works… </string>
-
+    <string name="p2_death1">Getting yourself trapped in a house with zombies… \n always works… </string>
+    <string name="p2_death2">Going out in the open without any weapons or whatsoever… \n always works…</string>
+    <string name="p2_death3">Getting yourself trapped in a house with zombies… \n always works… </string>
 
 
     <!-- Strings used for Page 3 -->
     <string name="p3_dialogue1">You decided to call somebody for help. </string>
-    <string name="p3_decision" >Who do you call?
+    <string name="p3_decision">Who do you call?
         \n
         \n 1. The police
         \n 2. Your friend
@@ -78,24 +81,22 @@
     <string name="p3_parents6">-CALL ENDED- </string>
 
 
-
     <!-- Strings used for Page 4 -->
     <string name="p4_dialogue1">You found a knife and some food. </string>
-    <string name="p4_decision" >Where do you go next?
+    <string name="p4_decision">Where do you go next?
         \n
         \n 1. Go to the basement.
         \n 2. Go to the backyard.
         \n 3. Go to your room.
         \n 4. Go outside your house. </string>
 
-    <string name="p4_death1" >Getting yourself trapped in a house with zombies… \n always works… </string>
-    <string name="p4_death2" >Going out in the open without any weapons or whatsoever… \n always works…</string>
-
+    <string name="p4_death1">Getting yourself trapped in a house with zombies… \n always works… </string>
+    <string name="p4_death2">Going out in the open without any weapons or whatsoever… \n always works…</string>
 
 
     <!-- Strings used for Page 5 -->
     <string name="p5_dialogue1">You suddenly hear zombies banging on your room\'s door. </string>
-    <string name="p5_decision" >What will you do?
+    <string name="p5_decision">What will you do?
         \n
         \n 1. Fight.
         \n 2. Jump from your room\'s window.
@@ -110,38 +111,36 @@
     <string name="p5_death4">Where would you even run to? </string>
 
 
-
     <!-- Strings used for Page 6 -->
     <string name="p6_dialogue1">On the road, you see someone in a van who\'s not a zombie. </string>
-    <string name="p6_decision" >What will you do?
+    <string name="p6_decision">What will you do?
         \n
         \n 1. Ask for help.
         \n 2. Go back to the house.
         \n 3. Ignore them.
         \n 4. Go to the supermarket. </string>
 
-    <string name="p6_death2" >Yes… Going back to the zombies where you ESCAPED from is a good idea. </string>
-    <string name="p6_death3" >Yeah, fight the zombie horde *ALONE*. THAT\'s a good idea. </string>
-    <string name="p6_death4" >You do know that so many people AND zombies are at the supermarket. </string>
-
+    <string name="p6_death2">Yes… Going back to the zombies where you ESCAPED from is a good idea. </string>
+    <string name="p6_death3">Yeah, fight the zombie horde *ALONE*. THAT\'s a good idea. </string>
+    <string name="p6_death4">You do know that so many people AND zombies are at the supermarket. </string>
 
 
     <!-- Strings used for Page 7 -->
     <string name="p7_dialogue1">They kindly help you and let you in their van.</string>
     <string name="p7_dialogue2">-CRASH-</string>
     <string name="p7_dialogue3">But they made an accident and you are now stranded. </string>
-    <string name="p7_decision" >What will you do?
+    <string name="p7_decision">What will you do?
         \n
         \n 1. Stay in the car.
-        \n 2. Use your food and look for shelter. (Only if you went to the kitchen)
+        \n 2. Grab your stuff and find some shelter.
         \n 3. Fight the zombies.
         \n 4. Just. Run. </string>
 
 
-    <string name="p7_death1" > Think, %1$s. Think!  </string>
-    <string name="p7_death3" > You vs thousands of zombies.
+    <string name="p7_death1"> Think, %1$s. Think!  </string>
+    <string name="p7_death3"> You vs thousands of zombies.
         \n Seems possible.  </string>
-    <string name="p7_death4" > I don\'t think you know where to run.
+    <string name="p7_death4"> I don\'t think you know where to run.
         \n Do you?</string>
 
 
@@ -151,5 +150,6 @@
     <string name="p7win_dialogue4"> You explore in and out of the cabin and found nothing and no one. </string>
     <string name="p7win_dialogue5"> You decide to spend your days and nights in the cabin for now… </string>
     <string name="p7win_dialogue6"> Well done, you survived the first night of many in the zombie apocalypse.</string>
+    <string name="developed_by">Developed by:</string>
 
 </resources>

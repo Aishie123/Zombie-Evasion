@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/seekbar_progress.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/seekbar_style.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/splashscreen.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_credits_screen.xml" value="0.29936594202898553" />
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_intro_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24547101449275363" />

@@ -208,7 +208,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
 
                 break;
 
-            // 2. Grab your stuff and find a shelter.
+            // 2. Grab your stuff and find some shelter.
             case R.id.btn7Choice2:
 
                 if (inventory){

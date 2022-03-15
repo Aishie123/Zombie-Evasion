@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".View.CreditsScreen">
+
+    <ImageView
+        android:id="@+id/bgCredits"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.35"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/bg_bedroom"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="210dp" />
+
+    <ImageView
+        android:id="@+id/creditsBox"
+        android:layout_width="642dp"
+        android:layout_height="360dp"
+        android:src="@drawable/txtbox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/btnCreditsBack"
+        android:layout_width="59dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="108dp"
+        android:onClick="back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/creditsBox"
+        app:layout_constraintTop_toTopOf="@+id/bgCredits"
+        app:layout_constraintVertical_bias="0.22"
+        app:srcCompat="@drawable/btn_back"
+        tools:ignore="OnClick" />
+
+    <TextView
+        android:id="@+id/txtCreditsList"
+        android:layout_width="393dp"
+        android:layout_height="187dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicoclean_regular"
+        android:gravity="center"
+        android:text="@string/credits"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgCredits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bgCredits"
+        app:layout_constraintTop_toTopOf="@+id/bgCredits"
+        app:layout_constraintVertical_bias="0.502" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
