@@ -96,10 +96,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death1.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death1); //allow mediaController to control our videoView
-        death1.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

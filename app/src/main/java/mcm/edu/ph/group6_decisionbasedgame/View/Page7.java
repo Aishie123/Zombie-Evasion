@@ -39,7 +39,6 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
     ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
     VideoView death7;
     MediaPlayer crashSFX;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent intro, goToHome;
@@ -104,10 +103,6 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death7.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death7); //allow mediaController to control our videoView
-        death7.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

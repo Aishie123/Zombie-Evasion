@@ -38,7 +38,6 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
     ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
     VideoView death5;
     MediaPlayer zombieSFX;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent page6, intro, goToHome;
@@ -98,10 +97,6 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death5.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death5); //allow mediaController to control our videoView
-        death5.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

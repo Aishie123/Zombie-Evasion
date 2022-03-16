@@ -38,7 +38,6 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
     ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
     VideoView death3;
     MediaPlayer endCallSFX, zombieSFX;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent page5, goToHome;
@@ -98,12 +97,6 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
         //Binding to music service to allow music to unpause. Refer to onServiceConnected method
         Intent musicIntent = new Intent(this, MusicPlayerService.class);
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
-
-        death3.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death3); //allow mediaController to control our videoView
-        death3.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

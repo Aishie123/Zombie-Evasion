@@ -32,12 +32,10 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page4 extends AppCompatActivity implements View.OnClickListener, ServiceConnection{
 
-
     ImageView darkShade4, btn4Home;
     TextView txt4Dialogue, txt4Choice1, txt4Choice2, txt4Choice3,txt4Choice4, txt4Restart;
     ImageButton btn4Choice1, btn4Choice2, btn4Choice3, btn4Choice4, btn4Restart;
     VideoView death4;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent page5, page6, intro, goToHome;
@@ -96,10 +94,6 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death4.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death4); //allow mediaController to control our videoView
-        death4.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

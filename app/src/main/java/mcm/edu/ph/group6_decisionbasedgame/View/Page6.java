@@ -36,7 +36,6 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
     TextView txt6Dialogue, txt6Choice1, txt6Choice2, txt6Choice3, txt6Choice4, txt6Restart;
     ImageButton btn6Choice1, btn6Choice2, btn6Choice3, btn6Choice4, btn6Restart;
     VideoView death6;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent page7, intro, goToHome;
@@ -98,10 +97,6 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death6.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death6); //allow mediaController to control our videoView
-        death6.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 

@@ -36,7 +36,6 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
     TextView txt2Dialogue, txt2Choice1, txt2Choice2, txt2Choice3,txt2Choice4, txt2Restart;
     ImageButton btn2Choice1, btn2Choice2, btn2Choice3, btn2Choice4, btn2Restart;
     VideoView death2;
-    MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
     Intent page4, intro, goToHome;
@@ -96,10 +95,6 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
         bindService(musicIntent, (ServiceConnection) this, BIND_AUTO_CREATE);
 
         death2.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.secret);
-        mediaController = new MediaController(this); //link mediaController to videoView
-        mediaController.setAnchorView(death2); //allow mediaController to control our videoView
-        death2.setMediaController(mediaController);
-
 
         handler = new Handler(Looper.getMainLooper()); // for delay
 
