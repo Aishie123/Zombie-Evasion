@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -44,9 +43,9 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
 
     boolean inventory, response;
     String userName, sibling;
-    String TAG = "Page3";
+    final String TAG = "Page3";
 
-    GameController randomizer = new GameController();
+    final GameController randomizer = new GameController();
 
     AlphaAnimation fadeIn;
     ObjectAnimator darkFadeIn;
@@ -444,7 +443,6 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        musicPlayerService.pauseMusic();
                                         playZombieSFX();
                                         txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                         txt3Dialogue.setText(R.string.p3_parents4);
@@ -453,7 +451,6 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
                                         handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                musicPlayerService.unpauseMusic();
                                                 zombieSFX.release();
                                                 txt3Dialogue.startAnimation(fadeIn); // dialogue fades in
                                                 txt3Dialogue.setText(R.string.p3_parents5);

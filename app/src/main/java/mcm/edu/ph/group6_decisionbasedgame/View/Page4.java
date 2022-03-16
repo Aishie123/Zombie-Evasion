@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -42,7 +41,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
 
     boolean inventory;
     String userName;
-    String TAG = "Page4";
+    final String TAG = "Page4";
 
     AlphaAnimation fadeIn;
     ObjectAnimator darkFadeIn;
@@ -149,7 +148,6 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
                     @Override
                     public void run() {
                         musicPlayerService.pauseMusic();
-
                         death4.setVisibility(View.VISIBLE);
                         death4.startAnimation(fadeIn); // video fades in
                         death4.start(); // play video

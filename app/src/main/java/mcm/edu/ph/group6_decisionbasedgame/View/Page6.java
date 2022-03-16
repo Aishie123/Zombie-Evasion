@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -42,7 +41,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
 
     boolean inventory;
     String userName;
-    String TAG = "Page6";
+    final String TAG = "Page6";
 
     AlphaAnimation fadeIn;
 

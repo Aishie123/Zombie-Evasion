@@ -2,6 +2,7 @@ package mcm.edu.ph.group6_decisionbasedgame.Controller;
 
 import java.util.Random;
 
+@SuppressWarnings("RedundantIfStatement")
 public class GameController {
 
     private final Random random = new Random();

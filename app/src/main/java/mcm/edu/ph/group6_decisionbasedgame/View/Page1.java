@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -30,6 +29,7 @@ import android.widget.VideoView;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings("CanBeFinal")
 public class Page1 extends AppCompatActivity implements View.OnClickListener, ServiceConnection{
 
     ImageView darkShade1, btn1Home;
@@ -37,7 +37,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Se
     ImageButton btn1Choice1, btn1Choice2, btn1Choice3, btn1Choice4, btn1Restart;
     VideoView death1;
     MusicPlayerService musicPlayerService;
-    MediaController mediaController;
     Handler handler;
     Intent page2, page3, page6, intro, goToHome;
 

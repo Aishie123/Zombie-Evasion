@@ -25,7 +25,7 @@ public class IntroScreen extends AppCompatActivity implements ServiceConnection 
     private EditText userInput;
     private ImageButton btnNext;
     private String userName;
-    private String TAG = "IntroScreen";
+    private final String TAG = "IntroScreen";
     MusicPlayerService musicPlayerService;
 
     GameData game = new GameData();

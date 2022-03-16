@@ -23,7 +23,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -45,7 +44,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
 
     boolean inventory;
     String userName;
-    String TAG = "Page7";
+    final String TAG = "Page7";
 
     AlphaAnimation fadeIn;
 
@@ -87,7 +86,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         userName = i.getExtras().getString("user");
         inventory = i.getExtras().getBoolean("supplies");
         Log.d(TAG, "The user's name is " + userName + ".");
-        Log.d(TAG, "Inventory is" + String.valueOf(inventory));
+        Log.d(TAG, "Inventory is" + inventory);
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not

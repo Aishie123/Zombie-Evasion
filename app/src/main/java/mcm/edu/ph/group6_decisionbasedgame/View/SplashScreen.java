@@ -16,7 +16,7 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     ProgressBar splashProgress;
-    int SPLASH_TIME = 3000; //This is 3 seconds
+    final int SPLASH_TIME = 3000; //This is 3 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

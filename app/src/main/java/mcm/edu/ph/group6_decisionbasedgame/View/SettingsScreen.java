@@ -72,7 +72,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         btnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
                 finish();
                 goToHome = new Intent(SettingsScreen.this, HomeScreen.class);
                 startActivity(goToHome);
@@ -84,79 +83,80 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
 
     }
 
+    // method for setting brightness manually --------------------------------------------------------------------------------------------------------------
+
     private void setBrightness(){
 
-        //Get the content resolver
+        //Gets the content resolver
         cResolver = getContentResolver();
 
-        //Get the current window
+        //Gets the current window
         window = getWindow();
 
-        //Set the seekbar range between 0 and 255
+        //Sets the seekbar range between 0 and 255
         brightBar.setMax(255);
-        //Set the seek bar progress to 1
+        //Sets the seek bar progress to 1
         brightBar.setKeyProgressIncrement(1);
 
         try
         {
-            //Get the current system brightness
+            //Gets the current system brightness
             brightness = Settings.System.getInt(cResolver, Settings.System.SCREEN_BRIGHTNESS);
         }
         catch (Settings.SettingNotFoundException e)
         {
-            //Throw an error case it couldn't be retrieved
+            //Throws an error, in case it couldn't be retrieved
             Log.e("Error", "Cannot access system brightness");
             e.printStackTrace();
         }
 
-        //Set the progress of the seek bar based on the system's brightness
+        //Sets the progress of the seek bar based on the system's brightness
         brightBar.setProgress(brightness);
 
-        //Register OnSeekBarChangeListener, so it can actually change values
+        //Registers OnSeekBarChangeListener, so it can actually change values
         brightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             public void onStopTrackingTouch(SeekBar seekBar)
             {
-                //Set the system brightness using the brightness variable value
+                //Sets the system brightness to manual, so that it wont turn back to its original brightness after exiting settings
                 Settings.System.putInt(cResolver, SCREEN_BRIGHTNESS_MODE, SCREEN_BRIGHTNESS_MODE_MANUAL);
+                //Sets the system brightness using the brightness variable value
                 Settings.System.putInt(cResolver, Settings.System.SCREEN_BRIGHTNESS, brightness);
-                //Get the current window attributes
+                //Gets the current window attributes
                 WindowManager.LayoutParams layoutpars = window.getAttributes();
-                //Set the brightness of this window
+                //Sets the brightness of this window
                 layoutpars.screenBrightness = brightness / (float)255;
-                //Apply attribute changes to this window
+                //Applies attribute changes to this window
                 window.setAttributes(layoutpars);
             }
 
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
-                //Nothing handled here
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
-                //Set the minimal brightness level
-                //if seek bar is 20 or any value below
+                //Sets the minimal brightness level
+                //If brightness bar is 20 or any value below
                 if(progress<=20)
                 {
-                    //Set the brightness to 20
-                    brightness=20;
+                    //Sets the brightness to 20
+                    brightness = 20;
                 }
-                else //brightness is greater than 20
+                else //If brightness is greater than 20
                 {
-                    //Set brightness variable based on the progress bar
+                    //Sets brightness variable based on the progress bar
                     brightness = progress;
                 }
             }
         });
     }
 
-
+    // method for setting volume --------------------------------------------------------------------------------------------------------------
     private void setVolume()
     {
         try
         {
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            // s
             musicVolBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             musicVolBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
@@ -186,6 +186,8 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         }
     }
 
+
+    // checks if permission from user to write settings is granted --------------------------------------------------------------------------------------------------------------
     @SuppressLint("ObsoleteSdkInt")
     private boolean checkSystemWritePermission() {
         boolean retVal = true;
@@ -202,11 +204,14 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         return retVal;
     }
 
+    // asks permission from user to write settings --------------------------------------------------------------------------------------------------------------
     private void openAndroidPermissionsMenu() {
         Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
         intent.setData(Uri.parse("package:" + this.getPackageName()));
         startActivity(intent);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

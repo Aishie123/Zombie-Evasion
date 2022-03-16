@@ -12,7 +12,7 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class MusicPlayerService extends Service {
     MediaPlayer player;
-    private IBinder mBinder = new MyBinder();
+    private final IBinder mBinder = new MyBinder();
     private Boolean mIsPaused;
     public int currentTrack;
 

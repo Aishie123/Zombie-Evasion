@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -44,9 +43,9 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
     boolean inventory, alive;
     String userName;
-    String TAG = "Page5";
+    final String TAG = "Page5";
 
-    GameController randomizer = new GameController();
+    final GameController randomizer = new GameController();
 
     AlphaAnimation fadeIn;
     ObjectAnimator darkFadeIn;
@@ -118,7 +117,6 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
     @SuppressLint("SetTextI18n")
     public void dialogue(){
-        musicPlayerService.pauseMusic();
         playZombieSFX();
         txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
         txt5Dialogue.setText(R.string.p5_dialogue1);
@@ -127,7 +125,6 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                musicPlayerService.unpauseMusic();
                 zombieSFX.release();
                 txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt5Dialogue.setText(R.string.p5_decision);
