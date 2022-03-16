@@ -24,22 +24,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Page3 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade3, btn3Home;
-    TextView txt3Dialogue, txt3Choice1, txt3Choice2, txt3Choice3,txt3Choice4, txt3Restart;
-    ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
-    VideoView death3;
-    MediaPlayer endCallSFX, zombieSFX;
-    MusicPlayerService musicPlayerService;
-    Handler handler;
-    Intent page5, goToHome;
+    private ImageView darkShade3, btn3Home;
+    private TextView txt3Dialogue, txt3Choice1, txt3Choice2, txt3Choice3,txt3Choice4;
+    private ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
+    private MediaPlayer endCallSFX, zombieSFX;
+    private MusicPlayerService musicPlayerService;
+    private Handler handler;
+    private Intent page5, goToHome;
 
     boolean inventory, response;
     String userName, sibling;
@@ -73,9 +72,6 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
         txt3Choice2 = findViewById(R.id.txt3Choice2);
         txt3Choice3 = findViewById(R.id.txt3Choice3);
         txt3Choice4 = findViewById(R.id.txt3Choice4);
-        txt3Restart = findViewById(R.id.txt3Restart);
-        death3 = findViewById(R.id.death3);
-
 
 
         // receiving user input from intro screen

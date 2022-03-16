@@ -24,15 +24,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings({"FieldCanBeLocal", "ConstantConditions", "ManualMinMaxCalculation"})
 public class SettingsScreen extends AppCompatActivity implements ServiceConnection  {
-    AudioManager audioManager;
-    ImageView btnBack;
-    SeekBar musicVolBar, brightBar;
-    Intent goToHome;
+    private AudioManager audioManager;
+    private ImageView btnBack;
+    private SeekBar musicVolBar, brightBar;
+    private Intent goToHome;
+    private MusicPlayerService musicPlayerService;
+    private int brightness;
     Context context;
-    MusicPlayerService musicPlayerService;
-
-    int brightness;
 
     //Content resolver used as a handle to the system's settings
     private ContentResolver cResolver;
@@ -136,6 +136,7 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
             {
                 //Sets the minimal brightness level
                 //If brightness bar is 20 or any value below
+                //noinspection ManualMinMaxCalculation
                 if(progress<=20)
                 {
                     //Sets the brightness to 20
@@ -188,6 +189,7 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
 
 
     // checks if permission from user to write settings is granted --------------------------------------------------------------------------------------------------------------
+    @SuppressWarnings("StatementWithEmptyBody")
     @SuppressLint("ObsoleteSdkInt")
     private boolean checkSystemWritePermission() {
         boolean retVal = true;

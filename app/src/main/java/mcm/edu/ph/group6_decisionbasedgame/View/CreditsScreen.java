@@ -15,10 +15,11 @@ import android.widget.ImageView;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings({"FieldCanBeLocal", "ConstantConditions"})
 public class CreditsScreen extends AppCompatActivity implements ServiceConnection {
-    ImageView btnBack;
-    Intent goToHome;
-    MusicPlayerService musicPlayerService;
+    private ImageView btnBack;
+    private Intent goToHome;
+    private MusicPlayerService musicPlayerService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

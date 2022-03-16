@@ -32,20 +32,18 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 @SuppressWarnings("CanBeFinal")
 public class Page1 extends AppCompatActivity implements View.OnClickListener, ServiceConnection{
 
-    ImageView darkShade1, btn1Home;
-    TextView txt1Dialogue, txt1Choice1, txt1Choice2, txt1Choice3,txt1Choice4, txt1Restart;
-    ImageButton btn1Choice1, btn1Choice2, btn1Choice3, btn1Choice4, btn1Restart;
-    VideoView death1;
-    MusicPlayerService musicPlayerService;
-    Handler handler;
-    Intent page2, page3, page6, intro, goToHome;
-
-    boolean inventory = false;
-    String userName;
-    String TAG = "Page1";
-
-    AlphaAnimation fadeIn;
-    ObjectAnimator darkFadeIn;
+    private ImageView darkShade1, btn1Home;
+    private TextView txt1Dialogue, txt1Choice1, txt1Choice2, txt1Choice3,txt1Choice4, txt1Restart;
+    private ImageButton btn1Choice1, btn1Choice2, btn1Choice3, btn1Choice4, btn1Restart;
+    private VideoView death1;
+    private MusicPlayerService musicPlayerService;
+    private Handler handler;
+    private Intent page2, page3, page6, intro, goToHome;
+    private boolean inventory = false;
+    private String userName;
+    private final String TAG = "Page1";
+    private AlphaAnimation fadeIn;
+    private ObjectAnimator darkFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

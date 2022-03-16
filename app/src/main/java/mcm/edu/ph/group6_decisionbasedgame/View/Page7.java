@@ -30,25 +30,22 @@ import android.widget.VideoView;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
-
+@SuppressWarnings("FieldCanBeLocal")
 public class Page7 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade7, bgPage7, btn7Home;
-    TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
-    ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
-    VideoView death7;
-    MediaPlayer crashSFX;
-    MusicPlayerService musicPlayerService;
-    Handler handler;
-    Intent intro, goToHome;
-
-    boolean inventory;
-    String userName;
-    final String TAG = "Page7";
-
-    AlphaAnimation fadeIn;
-
-    ObjectAnimator darkFadeIn;
+    private ImageView darkShade7, bgPage7, btn7Home;
+    private TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
+    private ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
+    private VideoView death7;
+    private MediaPlayer crashSFX;
+    private MusicPlayerService musicPlayerService;
+    private Handler handler;
+    private Intent intro, goToHome;
+    private boolean inventory;
+    private String userName;
+    private final String TAG = "Page7";
+    private AlphaAnimation fadeIn;
+    private ObjectAnimator darkFadeIn;
 
     @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
     @Override

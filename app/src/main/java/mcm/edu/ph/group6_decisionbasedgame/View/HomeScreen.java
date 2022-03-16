@@ -17,13 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class HomeScreen extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageButton btnStart, btnSettings, btnCredits;
-    Intent goToGame, goToSettings, goToCredits;
-    MusicPlayerService musicPlayerService;
-
-    String TAG = "Home";
+    private ImageButton btnStart, btnSettings, btnCredits;
+    private Intent goToGame, goToSettings, goToCredits;
+    private MusicPlayerService musicPlayerService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

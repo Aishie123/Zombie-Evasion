@@ -17,18 +17,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
-import mcm.edu.ph.group6_decisionbasedgame.Model.GameData;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings("ConstantConditions")
 public class IntroScreen extends AppCompatActivity implements ServiceConnection {
 
-    private EditText userInput;
+    private  EditText userInput;
     private ImageButton btnNext;
     private String userName;
     private final String TAG = "IntroScreen";
-    MusicPlayerService musicPlayerService;
-
-    GameData game = new GameData();
+    private MusicPlayerService musicPlayerService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +56,6 @@ public class IntroScreen extends AppCompatActivity implements ServiceConnection 
             public void onClick(View v) {
                 if (v.getId() == R.id.btnNext) {
                     userName = userInput.getText().toString();
-                    game = new GameData(userName);
                     Log.d(TAG, "The user's name is " + userName + ".");
                     Intent i = new Intent(getApplicationContext(), Page1.class);
                     i.putExtra("user", userName);

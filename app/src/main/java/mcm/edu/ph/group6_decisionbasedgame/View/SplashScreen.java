@@ -13,10 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings({"FieldCanBeLocal", "ConstantConditions"})
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
-    ProgressBar splashProgress;
-    final int SPLASH_TIME = 3000; //This is 3 seconds
+    private ProgressBar splashProgress;
+    private final int SPLASH_TIME = 3000; //This is 3 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

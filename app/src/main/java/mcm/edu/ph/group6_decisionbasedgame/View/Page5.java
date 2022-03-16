@@ -30,22 +30,21 @@ import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Page5 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade5, btn5Home;
-    TextView txt5Dialogue, txt5Choice1, txt5Choice2, txt5Choice3,txt5Choice4, txt5Restart;
-    ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
-    VideoView death5;
-    MediaPlayer zombieSFX;
-    MusicPlayerService musicPlayerService;
-    Handler handler;
-    Intent page6, intro, goToHome;
-
-    boolean inventory, alive;
-    String userName;
-    final String TAG = "Page5";
-
-    final GameController randomizer = new GameController();
+    private ImageView darkShade5, btn5Home;
+    private TextView txt5Dialogue, txt5Choice1, txt5Choice2, txt5Choice3,txt5Choice4, txt5Restart;
+    private ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
+    private VideoView death5;
+    private MediaPlayer zombieSFX;
+    private MusicPlayerService musicPlayerService;
+    private Handler handler;
+    private Intent page6, intro, goToHome;
+    private boolean inventory, alive;
+    private String userName;
+    private final String TAG = "Page5";
+    private final GameController randomizer = new GameController();
 
     AlphaAnimation fadeIn;
     ObjectAnimator darkFadeIn;

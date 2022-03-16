@@ -29,23 +29,21 @@ import android.widget.VideoView;
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
+@SuppressWarnings({"FieldCanBeLocal", "ConstantConditions"})
 public class Page2 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade2, btn2Home;
-    TextView txt2Dialogue, txt2Choice1, txt2Choice2, txt2Choice3,txt2Choice4, txt2Restart;
-    ImageButton btn2Choice1, btn2Choice2, btn2Choice3, btn2Choice4, btn2Restart;
-    VideoView death2;
-    MusicPlayerService musicPlayerService;
-    Handler handler;
-    Intent page4, intro, goToHome;
-
-    boolean inventory;
-    String userName;
-    final String TAG = "Page4";
-
-    AlphaAnimation fadeIn;
-
-    ObjectAnimator darkFadeIn;
+    private ImageView darkShade2, btn2Home;
+    private TextView txt2Dialogue, txt2Choice1, txt2Choice2, txt2Choice3,txt2Choice4, txt2Restart;
+    private ImageButton btn2Choice1, btn2Choice2, btn2Choice3, btn2Choice4, btn2Restart;
+    private VideoView death2;
+    private MusicPlayerService musicPlayerService;
+    private Handler handler;
+    private Intent page4, intro, goToHome;
+    private boolean inventory;
+    private String userName;
+    private final String TAG = "Page4";
+    private AlphaAnimation fadeIn;
+    private ObjectAnimator darkFadeIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
