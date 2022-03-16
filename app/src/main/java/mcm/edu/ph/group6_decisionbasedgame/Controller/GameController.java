@@ -6,7 +6,6 @@ import java.util.Random;
 public class GameController {
 
     private final Random random = new Random();
-    boolean response, alive;
 
     public String randomizeSibling(){
         int sex = random.nextInt(2);
@@ -22,6 +21,7 @@ public class GameController {
 
     public boolean randomizeSurvival(){
         int luck = random.nextInt(2);
+        boolean alive;
         if (luck == 1){
             alive = true; // live
         }
@@ -33,6 +33,7 @@ public class GameController {
 
     public boolean policeResponse(){
         int chance = random.nextInt(2);
+        boolean response;
         if (chance == 1){
             response = true; // respond
         }
