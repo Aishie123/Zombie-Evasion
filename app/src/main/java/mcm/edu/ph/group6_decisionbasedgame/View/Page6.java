@@ -1,10 +1,12 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -22,20 +24,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page6 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
-    ImageView darkShade6;
+
+    ImageView darkShade6, btn6Home;
     TextView txt6Dialogue, txt6Choice1, txt6Choice2, txt6Choice3, txt6Choice4, txt6Restart;
     ImageButton btn6Choice1, btn6Choice2, btn6Choice3, btn6Choice4, btn6Restart;
     VideoView death6;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent page7, intro;
+    Intent page7, intro, goToHome;
 
     boolean inventory;
     String userName;
@@ -59,8 +63,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade6 = findViewById(R.id.darkShade6);
-
-
+        btn6Home = findViewById(R.id.btn6Home);
         btn6Choice1 = findViewById(R.id.btn6Choice1);
         btn6Choice2 = findViewById(R.id.btn6Choice2);
         btn6Choice3 = findViewById(R.id.btn6Choice3);
@@ -83,6 +86,7 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn6Home.setOnClickListener(this);
         btn6Choice1.setOnClickListener(this);
         btn6Choice2.setOnClickListener(this);
         btn6Choice3.setOnClickListener(this);
@@ -243,6 +247,38 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
                 }, 1500); // 1 and a half seconds delay
                 break;
 
+            // If home button is pressed
+            case R.id.btn6Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page6.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page6.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
+                break;
+
             // If restart button is pressed
             case R.id.btn6Restart:
                 intro = new Intent(getApplicationContext(), IntroScreen.class);
@@ -366,6 +402,8 @@ public class Page6 extends AppCompatActivity implements View.OnClickListener, Se
         });
 
     }
+
+    // --------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

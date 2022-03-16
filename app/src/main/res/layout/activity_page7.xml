@@ -149,7 +149,7 @@
         tools:ignore="HardcodedText" />
 
   <ImageView
-      android:id="@+id/btnHome7"
+      android:id="@+id/btn7Home"
       android:layout_width="47dp"
       android:layout_height="50dp"
       app:layout_constraintBottom_toBottomOf="parent"

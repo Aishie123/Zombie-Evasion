@@ -1,8 +1,10 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -32,7 +34,7 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page7 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade7, bgPage7;
+    ImageView darkShade7, bgPage7, btn7Home;
     TextView txt7Dialogue, txt7Choice1, txt7Choice2, txt7Choice3,txt7Choice4, txt7Restart;
     ImageButton btn7Choice1, btn7Choice2, btn7Choice3, btn7Choice4, btn7Restart;
     VideoView death7;
@@ -40,7 +42,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent intro;
+    Intent intro, goToHome;
 
     boolean inventory;
     String userName;
@@ -66,6 +68,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         //initializing components
         darkShade7 = findViewById(R.id.darkShade7);
         bgPage7 = findViewById(R.id.bgPage7);
+        btn7Home = findViewById(R.id.btn7Home);
         btn7Choice1 = findViewById(R.id.btn7Choice1);
         btn7Choice2 = findViewById(R.id.btn7Choice2);
         btn7Choice3 = findViewById(R.id.btn7Choice3);
@@ -89,6 +92,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn7Home.setOnClickListener(this);
         btn7Choice1.setOnClickListener(this);
         btn7Choice2.setOnClickListener(this);
         btn7Choice3.setOnClickListener(this);
@@ -229,7 +233,7 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
                     darkFadeIn.start(); // covers the screen with a black shape
                     txt7Dialogue.setText(""); // makes dialogue empty
 
-                    // the code inside handler will run after the 6-sec delay
+                    // the code inside handler will run after the 3-sec delay
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -273,18 +277,17 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
                                                                     showRestartButton();
                                                                     txt7Restart.setText("Play Again");
                                                                 }
-                                                            }, 4000); // 4 seconds delay
+                                                            }, 6000); // 6 seconds delay
                                                         }
-                                                    }, 4000); // 4 seconds delay
+                                                    }, 6000); // 6 seconds delay
                                                 }
-                                            }, 4000); // 4 seconds delay
+                                            }, 6000); // 6 seconds delay
                                         }
-                                    }, 4000); // 4 seconds delay
+                                    }, 6000); // 6 seconds delay
                                 }
-                            }, 4000); // 4 seconds delay
-
+                            }, 6000); // 6 seconds delay
                         }
-                    }, 4000); // 4 seconds delay
+                    }, 3000); // 3 seconds delay
 
                 }
                 else if (!inventory){
@@ -357,6 +360,38 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
                     }
                 }, 1500); // 1 and a half seconds delay
 
+                break;
+
+            // If home button is pressed
+            case R.id.btn7Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page7.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page7.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
                 break;
 
             // If reset button is pressed
@@ -480,6 +515,8 @@ public class Page7 extends AppCompatActivity implements View.OnClickListener, Se
         });
 
     }
+
+ // --------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

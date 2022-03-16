@@ -1,10 +1,12 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
@@ -29,14 +32,14 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page2 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade2;
+    ImageView darkShade2, btn2Home;
     TextView txt2Dialogue, txt2Choice1, txt2Choice2, txt2Choice3,txt2Choice4, txt2Restart;
     ImageButton btn2Choice1, btn2Choice2, btn2Choice3, btn2Choice4, btn2Restart;
     VideoView death2;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent page4, intro;
+    Intent page4, intro, goToHome;
 
     boolean inventory;
     String userName;
@@ -58,6 +61,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade2 = findViewById(R.id.darkShade2);
+        btn2Home = findViewById(R.id.btn2Home);
         btn2Choice1 = findViewById(R.id.btn2Choice1);
         btn2Choice2 = findViewById(R.id.btn2Choice2);
         btn2Choice3 = findViewById(R.id.btn2Choice3);
@@ -80,6 +84,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn2Home.setOnClickListener(this);
         btn2Choice1.setOnClickListener(this);
         btn2Choice2.setOnClickListener(this);
         btn2Choice3.setOnClickListener(this);
@@ -120,14 +125,14 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
         txt2Dialogue.startAnimation(fadeIn); // dialogue fades in
         txt2Dialogue.setText(R.string.p2_dialogue1);
 
-        // the code inside handler will run after the 2-sec delay
+        // the code inside handler will run after the 3-sec delay
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 txt2Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt2Dialogue.setText(R.string.p2_dialogue2);
 
-                // the code inside handler will run after the 2-sec delay
+                // the code inside handler will run after the 3-sec delay
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -136,9 +141,9 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
                         showButtons(); //show choices
                     }
-                }, 2000); // 2 seconds delay
+                }, 3000); // 3 seconds delay
             }
-        }, 2000); // 2 seconds delay
+        }, 3000); // 3 seconds delay
     }
 
 
@@ -147,7 +152,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
     public void onClick(View v){
         switch (v.getId()){
 
-            // 1. go to the backyard
+            // 1. Go to the backyard.
             case R.id.btn2Choice1:
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
@@ -180,7 +185,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
                 break;
 
-            // 2. go to the basement
+            // 2. Go to the basement.
             case R.id.btn2Choice2:
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
@@ -212,7 +217,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
                 }, 1500); // 1 and a half seconds delay
                 break;
 
-            // 3. stay in the kitchen
+            // 3. Stay in the kitchen.
             case R.id.btn2Choice3:
                 hideButtons(); // hide choices
                 darkFadeIn.start(); // covers the screen with a black shape
@@ -251,10 +256,41 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
                 finish();
                 page4.putExtra("user", userName);
                 page4.putExtra("supplies", inventory);
-                startActivity(page4); // moves to page 6 activity
+                startActivity(page4); // moves to page 4 activity
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
+            // If home button is pressed
+            case R.id.btn2Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page2.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page2.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
+                break;
 
             // If restart button is pressed
             case R.id.btn2Restart:
@@ -375,6 +411,8 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
         });
 
     }
+
+    // --------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

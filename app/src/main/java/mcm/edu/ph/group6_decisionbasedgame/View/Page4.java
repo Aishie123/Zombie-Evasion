@@ -1,10 +1,12 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
@@ -30,14 +33,14 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 public class Page4 extends AppCompatActivity implements View.OnClickListener, ServiceConnection{
 
 
-    ImageView darkShade4;
+    ImageView darkShade4, btn4Home;
     TextView txt4Dialogue, txt4Choice1, txt4Choice2, txt4Choice3,txt4Choice4, txt4Restart;
     ImageButton btn4Choice1, btn4Choice2, btn4Choice3, btn4Choice4, btn4Restart;
     VideoView death4;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent page5, page6, intro;
+    Intent page5, page6, intro, goToHome;
 
     boolean inventory;
     String userName;
@@ -56,8 +59,8 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
 
         setContentView(R.layout.activity_page4);
         //initializing components
-        darkShade4 = findViewById(R.id.darkShade1);
-
+        darkShade4 = findViewById(R.id.darkShade4);
+        btn4Home = findViewById(R.id.btn4Home);
         btn4Choice1 = findViewById(R.id.btn4Choice1);
         btn4Choice2 = findViewById(R.id.btn4Choice2);
         btn4Choice3 = findViewById(R.id.btn4Choice3);
@@ -81,6 +84,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn4Home.setOnClickListener(this);
         btn4Choice1.setOnClickListener(this);
         btn4Choice2.setOnClickListener(this);
         btn4Choice3.setOnClickListener(this);
@@ -132,7 +136,7 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
 
              showButtons(); //show choices
          }
-     }, 2000); // 2 seconds delay
+     }, 3000); // 3 seconds delay
  }
 
 
@@ -226,6 +230,37 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
+            // If home button is pressed
+            case R.id.btn4Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page4.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page4.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
+                break;
 
             // If restart button is pressed
             case R.id.btn4Restart:
@@ -346,6 +381,8 @@ public class Page4 extends AppCompatActivity implements View.OnClickListener, Se
         });
 
     }
+
+    // --------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

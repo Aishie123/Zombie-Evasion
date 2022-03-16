@@ -1,10 +1,12 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
@@ -30,7 +33,7 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page3 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade3;
+    ImageView darkShade3, btn3Home;
     TextView txt3Dialogue, txt3Choice1, txt3Choice2, txt3Choice3,txt3Choice4, txt3Restart;
     ImageButton btn3Choice1, btn3Choice2, btn3Choice3, btn3Choice4, btn3Restart;
     VideoView death3;
@@ -38,7 +41,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent page5;
+    Intent page5, goToHome;
 
     boolean inventory, response;
     String userName, sibling;
@@ -61,6 +64,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade3 = findViewById(R.id.darkShade3);
+        btn3Home = findViewById(R.id.btn3Home);
         btn3Choice1 = findViewById(R.id.btn3Choice1);
         btn3Choice2 = findViewById(R.id.btn3Choice2);
         btn3Choice3 = findViewById(R.id.btn3Choice3);
@@ -84,6 +88,7 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn3Home.setOnClickListener(this);
         btn3Choice1.setOnClickListener(this);
         btn3Choice2.setOnClickListener(this);
         btn3Choice3.setOnClickListener(this);
@@ -491,6 +496,38 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
 
             break;
 
+            // If home button is pressed
+            case R.id.btn3Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page3.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page3.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
+                break;
+
         }
     }
 
@@ -618,6 +655,8 @@ public class Page3 extends AppCompatActivity implements View.OnClickListener, Se
         });
 
     }
+
+    // --------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

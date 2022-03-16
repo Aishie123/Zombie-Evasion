@@ -1,10 +1,12 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
@@ -30,14 +33,15 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 
 public class Page5 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    ImageView darkShade5;
+    ImageView darkShade5, btn5Home;
     TextView txt5Dialogue, txt5Choice1, txt5Choice2, txt5Choice3,txt5Choice4, txt5Restart;
     ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
     VideoView death5;
+    MediaPlayer zombieSFX;
     MediaController mediaController;
     MusicPlayerService musicPlayerService;
     Handler handler;
-    Intent page6, intro;
+    Intent page6, intro, goToHome;
 
     boolean inventory, alive;
     String userName;
@@ -60,6 +64,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade5 = findViewById(R.id.darkShade5);
+        btn5Home = findViewById(R.id.btn5Home);
         btn5Choice1 = findViewById(R.id.btn5Choice1);
         btn5Choice2 = findViewById(R.id.btn5Choice2);
         btn5Choice3 = findViewById(R.id.btn5Choice3);
@@ -81,6 +86,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
+        btn5Home.setOnClickListener(this);
         btn5Choice1.setOnClickListener(this);
         btn5Choice2.setOnClickListener(this);
         btn5Choice3.setOnClickListener(this);
@@ -117,22 +123,31 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
     @SuppressLint("SetTextI18n")
     public void dialogue(){
-
+        musicPlayerService.pauseMusic();
+        playZombieSFX();
         txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
         txt5Dialogue.setText(R.string.p5_dialogue1);
 
-        // the code inside handler will run after the 2-sec delay
+        // the code inside handler will run after the 3-sec delay
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                musicPlayerService.unpauseMusic();
+                zombieSFX.release();
                 txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
                 txt5Dialogue.setText(R.string.p5_decision);
                 showButtons(); //show choices
             }
-        }, 2000); // 2 seconds delay
+        }, 3000); // 3 seconds delay
 
     }
 
+    public void playZombieSFX(){
+        zombieSFX = MediaPlayer.create(this, R.raw.sfx_zombiebanging2);
+        zombieSFX.setVolume(100,100);
+        zombieSFX.setLooping(false);
+        zombieSFX.start();
+    }
 
     // actions after player makes a decision and clicks a button -------------------------------------------------------
     @SuppressWarnings({"PointlessBooleanExpression", "ConstantConditions"})
@@ -144,6 +159,8 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
             case R.id.btn5Choice1:
 
                 if (inventory == true) {
+                    hideButtons(); // hide choices
+                    darkFadeIn.start(); // covers the screen with a black shape
                     txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
                     txt5Dialogue.setText(R.string.p5_alive1);
 
@@ -153,7 +170,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                         public void run() {
                             goOutside();
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 3000); // 3 seconds delay
 
                 }
 
@@ -166,7 +183,6 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                         @Override
                         public void run() {
                             musicPlayerService.pauseMusic();
-
                             death5.setVisibility(View.VISIBLE);
                             death5.startAnimation(fadeIn); // video fades in
                             death5.start(); // play video
@@ -194,6 +210,8 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                 alive = randomizer.randomizeSurvival();
 
                 if (alive == true) {
+                    hideButtons(); // hide choices
+                    darkFadeIn.start(); // covers the screen with a black shape
                     txt5Dialogue.startAnimation(fadeIn); // dialogue fades in
                     txt5Dialogue.setText(R.string.p5_alive2);
 
@@ -203,7 +221,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                         public void run() {
                             goOutside();
                         }
-                    }, 2000); // 2 seconds delay
+                    }, 3000); // 3 seconds delay
                 }
 
                 else if (alive == false){ // If user dies
@@ -298,6 +316,37 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                 }, 1500); // 1 and a half seconds delay
                 break;
 
+            // If home button is pressed
+            case R.id.btn5Home:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (!isFinishing()){
+                            new AlertDialog.Builder(Page5.this)
+                                    .setTitle("Exit Game")
+                                    .setMessage("Go back to home screen?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                            goToHome = new Intent(Page5.this, SplashScreen.class);
+                                            startActivity(goToHome);
+                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    }
+                });
+                break;
 
             // If restart button is pressed
             case R.id.btn5Restart:
