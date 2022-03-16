@@ -32,7 +32,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
     private Intent goToHome;
     private MusicPlayerService musicPlayerService;
     private int brightness;
-    Context context;
 
     //Content resolver used as a handle to the system's settings
     private ContentResolver cResolver;
@@ -62,8 +61,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         //Binding to music service to allow music to unpause. Refer to onServiceConnected method
         Intent musicIntent = new Intent(this, MusicPlayerService.class);
         bindService(musicIntent, this, BIND_AUTO_CREATE);
-
-        context = getApplicationContext();
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setVolume();
@@ -157,7 +154,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         try
         {
             audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-            // s
             musicVolBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             musicVolBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
