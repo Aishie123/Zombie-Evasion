@@ -40,14 +40,12 @@ public class CreditsScreen extends AppCompatActivity implements ServiceConnectio
             @Override
             public void onClick(View view) {
                 finish();
-                goToHome = new Intent(CreditsScreen.this, HomeScreen.class);
-                startActivity(goToHome);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
             }
         });
 
     }
+
+    //-------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

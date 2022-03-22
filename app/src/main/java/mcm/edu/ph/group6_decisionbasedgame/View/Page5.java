@@ -1,12 +1,10 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -23,7 +21,6 @@ import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.GameController;
@@ -33,15 +30,16 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 @SuppressWarnings("FieldCanBeLocal")
 public class Page5 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    private ImageView darkShade5, btn5Home;
+    private ImageView darkShade5, btn5Menu;
     private TextView txt5Dialogue, txt5Choice1, txt5Choice2, txt5Choice3,txt5Choice4, txt5Restart;
     private ImageButton btn5Choice1, btn5Choice2, btn5Choice3, btn5Choice4, btn5Restart;
     private VideoView death5;
     private MediaPlayer zombieSFX;
     private MusicPlayerService musicPlayerService;
     private Handler handler;
-    private Intent page6, intro, goToHome;
+    private Intent page6, intro;
     private boolean inventory, alive;
+    private final boolean noRestart = false; // can restart in the menu
     private String userName;
     private final String TAG = "Page5";
     private final GameController randomizer = new GameController();
@@ -61,7 +59,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade5 = findViewById(R.id.darkShade5);
-        btn5Home = findViewById(R.id.btn5Home);
+        btn5Menu = findViewById(R.id.btn5Menu);
         btn5Choice1 = findViewById(R.id.btn5Choice1);
         btn5Choice2 = findViewById(R.id.btn5Choice2);
         btn5Choice3 = findViewById(R.id.btn5Choice3);
@@ -83,7 +81,7 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
-        btn5Home.setOnClickListener(this);
+        btn5Menu.setOnClickListener(this);
         btn5Choice1.setOnClickListener(this);
         btn5Choice2.setOnClickListener(this);
         btn5Choice3.setOnClickListener(this);
@@ -307,36 +305,10 @@ public class Page5 extends AppCompatActivity implements View.OnClickListener, Se
                 }, 1500); // 1 and a half seconds delay
                 break;
 
-            // If home button is pressed
-            case R.id.btn5Home:
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (!isFinishing()){
-                            new AlertDialog.Builder(Page5.this)
-                                    .setTitle("Exit Game")
-                                    .setMessage("Go back to home screen?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                            goToHome = new Intent(Page5.this, SplashScreen.class);
-                                            startActivity(goToHome);
-                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    }
-                });
+            case R.id.btn5Menu:
+                Intent goToMenu = new Intent(Page5.this, MenuScreen.class);
+                goToMenu.putExtra("no restart", noRestart);
+                startActivity(goToMenu);
                 break;
 
             // If restart button is pressed

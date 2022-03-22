@@ -150,7 +150,7 @@
         tools:ignore="HardcodedText" />
 
     <ImageView
-        android:id="@+id/btn3Home"
+        android:id="@+id/btn3Menu"
         android:layout_width="47dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,7 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.051"
-        app:srcCompat="@drawable/btn_home" />
+        app:srcCompat="@drawable/btn_menu" />
 
     <ImageButton
         android:id="@+id/btn3Restart"

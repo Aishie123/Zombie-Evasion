@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.MenuScreen">
+
+
+    <ImageView
+        android:id="@+id/imgMenuBox"
+        android:layout_width="400dp"
+        android:layout_height="290dp"
+        android:adjustViewBounds="true"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/txtbox" />
+
+    <ImageButton
+        android:id="@+id/btnMenuContinue"
+        android:layout_width="122dp"
+        android:layout_height="60dp"
+        android:adjustViewBounds="true"
+        android:onClick="menuToContinue"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMenuBox"
+        app:layout_constraintEnd_toEndOf="@+id/imgMenuBox"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toStartOf="@+id/imgMenuBox"
+        app:layout_constraintTop_toTopOf="@+id/imgMenuBox"
+        app:layout_constraintVertical_bias="0.313"
+        app:srcCompat="@drawable/btn_up"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtMenuContinue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Continue"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuContinue"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenuContinue"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/btnMenuContinue"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuContinue" />
+
+    <ImageButton
+        android:id="@+id/btnMenuSettings"
+        android:layout_width="122dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:adjustViewBounds="true"
+        android:onClick="menuToSettings"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuContinue"
+        app:layout_constraintEnd_toEndOf="@+id/imgMenuBox"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toEndOf="@+id/btnMenuContinue"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuContinue"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/btn_up"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtMenuSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Settings"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuSettings"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenuSettings"
+        app:layout_constraintStart_toStartOf="@+id/btnMenuSettings"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuSettings" />
+
+    <ImageButton
+        android:id="@+id/btnMenuRestart"
+        android:layout_width="122dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:adjustViewBounds="true"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:onClick="menuToRestart"
+        app:layout_constraintBottom_toBottomOf="@+id/imgMenuBox"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenuContinue"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnMenuContinue"
+        app:layout_constraintTop_toBottomOf="@+id/btnMenuContinue"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/btn_up"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtMenuRestart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Restart"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuRestart"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenuRestart"
+        app:layout_constraintStart_toStartOf="@+id/btnMenuRestart"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuRestart" />
+
+    <ImageButton
+        android:id="@+id/btnMenuExit"
+        android:layout_width="122dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="40dp"
+        android:adjustViewBounds="true"
+        android:onClick="menuToExit"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuRestart"
+        app:layout_constraintEnd_toEndOf="@+id/imgMenuBox"
+        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintStart_toEndOf="@+id/btnMenuRestart"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuRestart"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/btn_up"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtMenuExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/nicobold_regular"
+        android:text="Exit"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMenuExit"
+        app:layout_constraintEnd_toEndOf="@+id/btnMenuExit"
+        app:layout_constraintStart_toStartOf="@+id/btnMenuExit"
+        app:layout_constraintTop_toTopOf="@+id/btnMenuExit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

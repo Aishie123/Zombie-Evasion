@@ -27,9 +27,7 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 @SuppressWarnings({"FieldCanBeLocal", "ConstantConditions", "ManualMinMaxCalculation"})
 public class SettingsScreen extends AppCompatActivity implements ServiceConnection  {
     private AudioManager audioManager;
-    private ImageView btnBack;
     private SeekBar musicVolBar, brightBar;
-    private Intent goToHome;
     private MusicPlayerService musicPlayerService;
     private int brightness;
 
@@ -43,7 +41,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
     private static final int SCREEN_BRIGHTNESS_MODE_AUTOMATIC = 1;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +51,6 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         setContentView(R.layout.activity_settings_screen);
         checkSystemWritePermission();
 
-        btnBack = findViewById(R.id.btnSettingsBack);
         musicVolBar = findViewById(R.id.volumeBar);
         brightBar = findViewById(R.id.brightnessBar);
 
@@ -66,22 +62,14 @@ public class SettingsScreen extends AppCompatActivity implements ServiceConnecti
         setVolume();
         setBrightness();
 
-        btnBack.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                finish();
-                goToHome = new Intent(SettingsScreen.this, HomeScreen.class);
-                startActivity(goToHome);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
 
-            }
-        }
-        );
-
+    // goes back to previous screen when btnBack is clicked ---------------------------------------------------------------------------------------------------
+    public void goBack(View v) {
+        finish();
     }
 
     // method for setting brightness manually --------------------------------------------------------------------------------------------------------------
-
     private void setBrightness(){
 
         //Gets the content resolver

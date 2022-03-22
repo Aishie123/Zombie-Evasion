@@ -15,9 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Group6_DecisionBasedGame">
         <activity
+            android:name=".View.MenuScreen"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppDialogTheme" />
+        <activity
             android:name=".View.CreditsScreen"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppDialogTheme" />
         <activity
             android:name=".View.Page7"
             android:exported="false"
@@ -53,9 +59,10 @@
         <activity
             android:name=".View.SettingsScreen"
             android:exported="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppDialogTheme" />
         <activity
-            android:name=".View.HomeScreen"
+            android:name=".View.StartingScreen"
             android:exported="true"
             android:screenOrientation="landscape" />
 

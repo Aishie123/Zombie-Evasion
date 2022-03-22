@@ -3,18 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.269" />
         <entry key="app/src/main/res/drawable/border_shadow.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/custom_thumb.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/darkshade.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/drawable/seekbar_progress.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/seekbar_style.xml" value="0.2425" />
         <entry key="app/src/main/res/drawable/splashscreen.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_credits_screen.xml" value="0.29936594202898553" />
+        <entry key="app/src/main/res/layout/activity_credits_screen.xml" value="0.28285714285714286" />
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_intro_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_intro_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24547101449275363" />
+        <entry key="app/src/main/res/layout/activity_menu_screen.xml" value="0.2778965369816161" />
         <entry key="app/src/main/res/layout/activity_page1.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_page2.xml" value="0.10197368421052631" />
+        <entry key="app/src/main/res/layout/activity_page2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_page3.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_page4.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_page5.xml" value="0.1169811320754717" />
@@ -23,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_page8.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/layout/activity_settings_screen.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_starting_screen.xml" value="0.19410004275331338" />
       </map>
     </option>
   </component>

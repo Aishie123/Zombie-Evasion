@@ -18,7 +18,7 @@ import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
 import mcm.edu.ph.group6_decisionbasedgame.R;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class HomeScreen extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
+public class StartingScreen extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
     private ImageButton btnStart, btnSettings, btnCredits;
     private Intent goToGame, goToSettings, goToCredits;
@@ -30,7 +30,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide(); //hide the action bar
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_starting_screen);
 
         btnStart = findViewById(R.id.btnStart);
         btnSettings = findViewById(R.id.btnSettings);
@@ -54,7 +54,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
             case R.id.btnStart:
 
-                goToGame = new Intent(HomeScreen.this, IntroScreen.class);
+                goToGame = new Intent(StartingScreen.this, IntroScreen.class);
                 startActivity(goToGame);
                 finish();
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -62,16 +62,14 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
             case R.id.btnSettings:
 
-                goToSettings = new Intent(HomeScreen.this, SettingsScreen.class);
+                goToSettings = new Intent(StartingScreen.this, SettingsScreen.class);
                 startActivity(goToSettings);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
 
             case R.id.btnCredits:
 
-                goToCredits = new Intent(HomeScreen.this, CreditsScreen.class);
+                goToCredits = new Intent(StartingScreen.this, CreditsScreen.class);
                 startActivity(goToCredits);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 break;
 
         }
@@ -115,6 +113,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         });
 
     }
+
+    //----------------------------------------------------------------------------------------------------------
 
     @Override
     public void onPause(){

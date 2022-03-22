@@ -50,6 +50,7 @@ public class IntroScreen extends AppCompatActivity implements ServiceConnection 
 
     }
 
+    // onClick -------------------------------------------------------------------------------------------------------
     public void userInput() {
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +66,14 @@ public class IntroScreen extends AppCompatActivity implements ServiceConnection 
 
             }
         });
+    }
+
+    // opens menu
+    public void introToMenu(View v){
+        Intent goToMenu = new Intent(IntroScreen.this, MenuScreen.class);
+        boolean noRestart = true; // can't restart in the menu
+        goToMenu.putExtra("no restart", noRestart);
+        startActivity(goToMenu);
     }
 
     //changing button images when pressed -----------------------------------------------------------------------------------------
@@ -86,6 +95,7 @@ public class IntroScreen extends AppCompatActivity implements ServiceConnection 
         });
     }
 
+    // -------------------------------------------------------------------------------------------------------------------
     @Override
     public void onPause(){
         super.onPause();

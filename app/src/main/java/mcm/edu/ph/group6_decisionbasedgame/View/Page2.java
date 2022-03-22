@@ -1,12 +1,10 @@
 package mcm.edu.ph.group6_decisionbasedgame.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
@@ -23,7 +21,6 @@ import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import mcm.edu.ph.group6_decisionbasedgame.Controller.MusicPlayerService;
@@ -32,14 +29,15 @@ import mcm.edu.ph.group6_decisionbasedgame.R;
 @SuppressWarnings({"FieldCanBeLocal", "ConstantConditions"})
 public class Page2 extends AppCompatActivity implements View.OnClickListener, ServiceConnection {
 
-    private ImageView darkShade2, btn2Home;
+    private ImageView darkShade2, btn2Menu;
     private TextView txt2Dialogue, txt2Choice1, txt2Choice2, txt2Choice3,txt2Choice4, txt2Restart;
     private ImageButton btn2Choice1, btn2Choice2, btn2Choice3, btn2Choice4, btn2Restart;
     private VideoView death2;
     private MusicPlayerService musicPlayerService;
     private Handler handler;
-    private Intent page4, intro, goToHome;
+    private Intent page4, intro;
     private boolean inventory;
+    private final boolean noRestart = false; // can restart in the menu
     private String userName;
     private final String TAG = "Page4";
     private AlphaAnimation fadeIn;
@@ -57,7 +55,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
         //initializing components
         darkShade2 = findViewById(R.id.darkShade2);
-        btn2Home = findViewById(R.id.btn2Home);
+        btn2Menu = findViewById(R.id.btn2Menu);
         btn2Choice1 = findViewById(R.id.btn2Choice1);
         btn2Choice2 = findViewById(R.id.btn2Choice2);
         btn2Choice3 = findViewById(R.id.btn2Choice3);
@@ -80,7 +78,7 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
 
         // setting listeners for the choice buttons
         // this will detect whether a button is clicked or not
-        btn2Home.setOnClickListener(this);
+        btn2Menu.setOnClickListener(this);
         btn2Choice1.setOnClickListener(this);
         btn2Choice2.setOnClickListener(this);
         btn2Choice3.setOnClickListener(this);
@@ -252,36 +250,12 @@ public class Page2 extends AppCompatActivity implements View.OnClickListener, Se
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out); // fade transitions when moving to the next activity
                 break;
 
-            // If home button is pressed
-            case R.id.btn2Home:
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        if (!isFinishing()){
-                            new AlertDialog.Builder(Page2.this)
-                                    .setTitle("Exit Game")
-                                    .setMessage("Go back to home screen?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                            goToHome = new Intent(Page2.this, SplashScreen.class);
-                                            startActivity(goToHome);
-                                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                                        }
-                                    })
-                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            Toast.makeText(getApplicationContext(),"You remained in game.",Toast.LENGTH_LONG).show();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    }
-                });
+            // If menu button is pressed
+            case R.id.btn2Menu:
+                Intent goToMenu = new Intent(Page2.this, MenuScreen.class);
+                goToMenu.putExtra("no restart", noRestart);
+                startActivity(goToMenu);
                 break;
 
             // If restart button is pressed
