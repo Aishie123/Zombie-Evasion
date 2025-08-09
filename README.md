@@ -12,15 +12,15 @@ In the middle of a zombie apocalypse, your goal is simple — **survive and esca
 
 ## 📸 Screenshots
 
-![Home Screen](Screenshots/ZombieEvasion_1.png)  
+![Home Screen](Screenshots/ZombieEvasion_1.jpg)  
 *Main Menu*
 
-![Gameplay 1](Screenshots/ZombieEvasion_2.png)  
-![Gameplay 2](Screenshots/ZombieEvasion_3.png)  
-![Gameplay 3](Screenshots/ZombieEvasion_4.png)  
+![Gameplay 1](Screenshots/ZombieEvasion_2.jpg)  
+![Gameplay 2](Screenshots/ZombieEvasion_3.jpg)  
+![Gameplay 3](Screenshots/ZombieEvasion_4.jpg)  
 *Gameplay sequences — make decisions, explore, and face the consequences.*
 
-![Ending](Screenshots/ZombieEvasion_5.png)  
+![Ending](Screenshots/ZombieEvasion_5.jpg)  
 *One of the possible endings*
 
 ## 📱 Installation
